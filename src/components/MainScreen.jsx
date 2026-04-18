@@ -133,7 +133,7 @@ function MainScreen({ language, user }) {
       {/* Whale Character Area */}
       <div style={{
         position: 'relative',
-        height: '320px',
+        height: '340px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -173,199 +173,260 @@ function MainScreen({ language, user }) {
           opacity: 0.6
         }}>🪙</div>
 
-        {/* Main Whale */}
+        {/* Main Whale - CSS Enhanced */}
         <div 
           onClick={handleWhaleTap}
           style={{
-            width: '200px',
-            height: '200px',
-            background: 'linear-gradient(135deg, #5a7a9a 0%, #3a5a7a 50%, #2a4a6a 100%)',
-            borderRadius: '50% 50% 45% 45%',
+            width: '220px',
+            height: '240px',
             position: 'relative',
             cursor: 'pointer',
-            transform: showTap ? 'scale(0.95)' : 'scale(1)',
-            transition: 'transform 0.1s',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.4), inset 0 -10px 30px rgba(0,0,0,0.2)'
+            transform: showTap ? 'scale(0.92) translateY(10px)' : 'scale(1)',
+            transition: 'all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+            filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.4))'
           }}
         >
+          {/* Body */}
+          <div style={{
+            position: 'absolute',
+            inset: '0',
+            background: 'linear-gradient(145deg, #6a8aaa 0%, #4a6a8a 50%, #3a5a7a 100%)',
+            borderRadius: '50% 50% 45% 45%',
+            boxShadow: 'inset 0 -20px 40px rgba(0,0,0,0.3), inset 0 20px 40px rgba(255,255,255,0.1)'
+          }} />
+          
+          {/* Belly */}
+          <div style={{
+            position: 'absolute',
+            bottom: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '140px',
+            height: '100px',
+            background: 'linear-gradient(180deg, #8aaaba 0%, #7a9aaa 100%)',
+            borderRadius: '50%',
+            opacity: 0.6
+          }} />
+
+          {/* Eyes Container */}
+          <div style={{
+            position: 'absolute',
+            top: '70px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            gap: '50px'
+          }}>
+            {/* Left Eye */}
+            <div style={{
+              width: '28px',
+              height: '32px',
+              background: 'white',
+              borderRadius: '50%',
+              position: 'relative',
+              boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: '10px',
+                left: '8px',
+                width: '12px',
+                height: '14px',
+                background: '#1a1a2e',
+                borderRadius: '50%'
+              }} />
+              <div style={{
+                position: 'absolute',
+                top: '12px',
+                left: '10px',
+                width: '4px',
+                height: '5px',
+                background: 'white',
+                borderRadius: '50%'
+              }} />
+            </div>
+
+            {/* Right Eye */}
+            <div style={{
+              width: '28px',
+              height: '32px',
+              background: 'white',
+              borderRadius: '50%',
+              position: 'relative',
+              boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: '10px',
+                left: '8px',
+                width: '12px',
+                height: '14px',
+                background: '#1a1a2e',
+                borderRadius: '50%'
+              }} />
+              <div style={{
+                position: 'absolute',
+                top: '12px',
+                left: '10px',
+                width: '4px',
+                height: '5px',
+                background: 'white',
+                borderRadius: '50%'
+              }} />
+            </div>
+          </div>
+
+          {/* Smile */}
+          <div style={{
+            position: 'absolute',
+            bottom: '90px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '50px',
+            height: '25px',
+            borderBottom: '4px solid #2a4a5a',
+            borderRadius: '0 0 50% 50%'
+          }} />
+
           {/* Cap */}
           <div style={{
             position: 'absolute',
             top: '-15px',
             left: '50%',
             transform: 'translateX(-50%)',
-            width: '100px',
-            height: '40px',
-            background: '#e8e8e8',
-            borderRadius: '50px 50px 0 0',
-            boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
+            width: '110px',
+            height: '45px',
+            background: 'linear-gradient(180deg, #f0f0f0 0%, #d0d0d0 100%)',
+            borderRadius: '55px 55px 0 0',
+            boxShadow: '0 8px 20px rgba(0,0,0,0.3)'
           }}>
+            {/* Logo on Cap */}
+            <div style={{
+              position: 'absolute',
+              top: '12px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '26px',
+              height: '26px',
+              background: '#4a90d9',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '14px',
+              color: 'white'
+            }}>✈</div>
+          </div>
+
+          {/* Jacket */}
+          <div style={{
+            position: 'absolute',
+            bottom: '-5px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '170px',
+            height: '95px',
+            background: 'linear-gradient(145deg, #5a6a7a 0%, #3a4a5a 100%)',
+            borderRadius: '25px 25px 45% 45%',
+            boxShadow: '0 15px 35px rgba(0,0,0,0.4)'
+          }}>
+            {/* NCT Logo */}
+            <div style={{
+              position: 'absolute',
+              top: '25px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              fontSize: '16px',
+              color: '#9aaaba',
+              fontWeight: 'bold',
+              letterSpacing: '3px'
+            }}>NCT</div>
+            {/* Triangle */}
             <div style={{
               position: 'absolute',
               top: '8px',
               left: '50%',
               transform: 'translateX(-50%)',
-              width: '24px',
-              height: '24px',
-              background: '#4a90d9',
-              borderRadius: '50%'
-            }} />
-          </div>
-
-          {/* Eyes */}
-          <div style={{
-            position: 'absolute',
-            top: '50px',
-            left: '45px',
-            width: '28px',
-            height: '35px',
-            background: 'white',
-            borderRadius: '50%',
-            boxShadow: 'inset 0 2px 5px rgba(0,0,0,0.1)'
-          }}>
-            <div style={{
-              position: 'absolute',
-              top: '12px',
-              left: '8px',
-              width: '12px',
-              height: '14px',
-              background: '#1a1a2e',
-              borderRadius: '50%'
-            }} />
-          </div>
-
-          <div style={{
-            position: 'absolute',
-            top: '50px',
-            right: '45px',
-            width: '28px',
-            height: '35px',
-            background: 'white',
-            borderRadius: '50%',
-            boxShadow: 'inset 0 2px 5px rgba(0,0,0,0.1)'
-          }}>
-            <div style={{
-              position: 'absolute',
-              top: '12px',
-              left: '8px',
-              width: '12px',
-              height: '14px',
-              background: '#1a1a2e',
-              borderRadius: '50%'
-            }} />
-          </div>
-
-          {/* Smile */}
-          <div style={{
-            position: 'absolute',
-            bottom: '70px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '60px',
-            height: '30px',
-            borderBottom: '4px solid #2a4a6a',
-            borderRadius: '0 0 50% 50%'
-          }} />
-
-          {/* Jacket */}
-          <div style={{
-            position: 'absolute',
-            bottom: '0',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '160px',
-            height: '90px',
-            background: 'linear-gradient(135deg, #4a5a6a, #3a4a5a)',
-            borderRadius: '20px 20px 45% 45%',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
-          }}>
-            <div style={{
-              position: 'absolute',
-              top: '20px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              fontSize: '14px',
-              color: '#8a9aaa',
-              fontWeight: 'bold',
-              letterSpacing: '2px'
-            }}>NCT</div>
-            <div style={{
-              position: 'absolute',
-              top: '5px',
-              left: '50%',
-              transform: 'translateX(-50%)',
               width: '0',
               height: '0',
-              borderLeft: '8px solid transparent',
-              borderRight: '8px solid transparent',
-              borderTop: '12px solid #c9a227'
+              borderLeft: '10px solid transparent',
+              borderRight: '10px solid transparent',
+              borderTop: '14px solid #c9a227'
             }} />
           </div>
 
-          {/* Arms */}
+          {/* Left Arm with Coin */}
           <div style={{
             position: 'absolute',
-            top: '90px',
-            left: '-20px',
-            width: '50px',
-            height: '70px',
-            background: 'linear-gradient(135deg, #5a7a9a, #4a6a8a)',
-            borderRadius: '25px',
-            transform: 'rotate(-20deg)',
-            boxShadow: '0 5px 15px rgba(0,0,0,0.2)'
+            top: '100px',
+            left: '-25px',
+            width: '55px',
+            height: '80px',
+            background: 'linear-gradient(145deg, #6a8aaa 0%, #5a7a9a 100%)',
+            borderRadius: '28px',
+            transform: 'rotate(-25deg)',
+            transformOrigin: 'top center',
+            boxShadow: '0 8px 25px rgba(0,0,0,0.3)'
           }}>
+            {/* Hand */}
             <div style={{
               position: 'absolute',
               bottom: '5px',
               left: '50%',
               transform: 'translateX(-50%)',
-              width: '35px',
-              height: '35px',
-              background: 'linear-gradient(135deg, #d4af37, #b8941f)',
+              width: '40px',
+              height: '40px',
+              background: 'linear-gradient(145deg, #d4af37 0%, #b8941f 100%)',
               borderRadius: '50%',
+              boxShadow: '0 5px 15px rgba(0,0,0,0.4)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '20px',
-              boxShadow: '0 3px 10px rgba(0,0,0,0.3)'
+              fontSize: '18px',
+              color: '#8a7218'
             }}>▲</div>
           </div>
 
+          {/* Right Arm (Thumb up) */}
           <div style={{
             position: 'absolute',
-            top: '80px',
-            right: '-25px',
-            width: '55px',
-            height: '75px',
-            background: 'linear-gradient(135deg, #5a7a9a, #4a6a8a)',
-            borderRadius: '25px',
-            transform: 'rotate(30deg)',
-            boxShadow: '0 5px 15px rgba(0,0,0,0.2)'
+            top: '90px',
+            right: '-30px',
+            width: '60px',
+            height: '85px',
+            background: 'linear-gradient(145deg, #6a8aaa 0%, #5a7a9a 100%)',
+            borderRadius: '30px',
+            transform: 'rotate(35deg)',
+            transformOrigin: 'top center',
+            boxShadow: '0 8px 25px rgba(0,0,0,0.3)'
           }}>
+            {/* Hand Thumb */}
             <div style={{
               position: 'absolute',
               bottom: '8px',
               left: '50%',
               transform: 'translateX(-50%)',
-              width: '40px',
-              height: '40px',
-              background: 'linear-gradient(135deg, #5a7a9a, #4a6a8a)',
+              width: '45px',
+              height: '45px',
+              background: 'linear-gradient(145deg, #6a8aaa 0%, #5a7a9a 100%)',
               borderRadius: '50%',
-              border: '3px solid #6a8aaa'
+              border: '4px solid #8aaaca',
+              boxShadow: 'inset 0 5px 15px rgba(255,255,255,0.2)'
             }} />
           </div>
 
           {/* Tail */}
           <div style={{
             position: 'absolute',
-            bottom: '-30px',
-            right: '20px',
-            width: '80px',
-            height: '60px',
-            background: 'linear-gradient(135deg, #4a6a8a, #3a5a7a)',
+            bottom: '-20px',
+            right: '10px',
+            width: '70px',
+            height: '55px',
+            background: 'linear-gradient(145deg, #4a6a8a 0%, #3a5a7a 100%)',
             borderRadius: '0 50% 50% 50%',
-            transform: 'rotate(-10deg)',
-            zIndex: -1
+            transform: 'rotate(-15deg)',
+            zIndex: -1,
+            boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
           }} />
         </div>
 
@@ -373,16 +434,17 @@ function MainScreen({ language, user }) {
         {showTap && (
           <div style={{
             position: 'absolute',
-            top: '20%',
-            right: '20%',
+            top: '15%',
+            right: '15%',
             background: 'white',
-            padding: '8px 16px',
-            borderRadius: '20px',
+            padding: '10px 18px',
+            borderRadius: '25px',
             color: '#1e3a5f',
             fontWeight: 'bold',
-            fontSize: '16px',
-            animation: 'floatUp 0.5s ease-out',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
+            fontSize: '18px',
+            animation: 'floatUp 0.6s ease-out',
+            boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
+            zIndex: 10
           }}>
             +5 $NCT ❤️
           </div>
@@ -487,8 +549,8 @@ function MainScreen({ language, user }) {
           50% { transform: translateY(-10px); }
         }
         @keyframes floatUp {
-          0% { opacity: 1; transform: translateY(0); }
-          100% { opacity: 0; transform: translateY(-30px); }
+          0% { opacity: 1; transform: translateY(0) scale(1); }
+          100% { opacity: 0; transform: translateY(-40px) scale(1.1); }
         }
       `}</style>
     </div>
