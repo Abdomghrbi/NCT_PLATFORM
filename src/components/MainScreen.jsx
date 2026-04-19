@@ -30,13 +30,13 @@ const translations = {
 
 function MainScreen({ language, user }) {
   const t = translations[language]
-  const [coins, setCoins] = useState(50300)
-  const [energy, setEnergy] = useState(95)
-  const [level, setLevel] = useState(10)
+  const [coins, setCoins] = useState(503)
+  const [energy, setEnergy] = useState(100)
+  const [level, setLevel] = useState(0)
   const [showTap, setShowTap] = useState(false)
 
   const handleWhaleTap = () => {
-    setCoins(c => c + 5)
+    setCoins(c => c + 1)
     setShowTap(true)
     setTimeout(() => setShowTap(false), 500)
     
@@ -182,7 +182,7 @@ function MainScreen({ language, user }) {
             position: 'relative',
             cursor: 'pointer',
             transform: showTap ? 'scale(0.92) translateY(10px)' : 'scale(1)',
-            transition: 'all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+            transition: 'all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
             filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.4))'
           }}
         >
@@ -446,7 +446,7 @@ function MainScreen({ language, user }) {
             boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
             zIndex: 10
           }}>
-            +5 $NCT ❤️
+            +1 $NCT 🐬
           </div>
         )}
       </div>
@@ -518,11 +518,11 @@ function MainScreen({ language, user }) {
         bottom: '0',
         left: '0',
         right: '0',
-        background: 'rgba(232, 238, 245, 0.95)',
+        background: 'rgba(200, 238, 245, 0.95)',
         backdropFilter: 'blur(10px)',
         display: 'flex',
         justifyContent: 'space-around',
-        padding: '12px 0',
+        padding: '10px 0',
         borderTop: '1px solid rgba(0,0,0,0.1)'
       }}>
         <div style={{ textAlign: 'center', color: '#4a90d9' }}>
