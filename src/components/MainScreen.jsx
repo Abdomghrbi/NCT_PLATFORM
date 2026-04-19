@@ -75,9 +75,7 @@ function MainScreen({ language, user }) {
           🐋
         </div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'white' }}>
-            NCT: {language === 'en' ? 'Community Whale' : 'Кит Сообщества'}
-          </div>
+          
           <div style={{ fontSize: '12px', color: '#7eb8e8' }}>NOTCOIN TOGETHER</div>
         </div>
         <div style={{ color: '#7eb8e8', fontSize: '20px' }}>⋮</div>
@@ -150,7 +148,7 @@ function MainScreen({ language, user }) {
             background: 'transparent',
             left: `${15 + i * 12}%`,
             top: `${20 + i * 10}%`,
-            animation: `float ${2 + i * 0.5}s ease-in-out infinite`
+            animation: `float ${2 + i * 0.2}s ease-in-out infinite`
           }} />
         ))}
 
@@ -164,14 +162,7 @@ function MainScreen({ language, user }) {
           opacity: 0.8
         }}>🪙</div>
         
-        <div style={{
-          position: 'absolute',
-          right: '15%',
-          bottom: '25%',
-          fontSize: '20px',
-          animation: 'float 2.5s ease-in-out infinite 0.5s',
-          opacity: 0.6
-        }}>🪙</div>
+        
 
         {/* Main Whale - CSS Enhanced */}
         <div 
@@ -294,8 +285,8 @@ function MainScreen({ language, user }) {
             top: '-15px',
             left: '50%',
             transform: 'translateX(-50%)',
-            width: '110px',
-            height: '45px',
+            width: '100px',
+            height: '40px',
             background: 'linear-gradient(180deg, #f0f0f0 0%, #d0d0d0 100%)',
             borderRadius: '55px 55px 0 0',
             boxShadow: '0 8px 20px rgba(0,0,0,0.3)'
@@ -333,11 +324,11 @@ function MainScreen({ language, user }) {
             {/* NCT Logo */}
             <div style={{
               position: 'absolute',
-              top: '25px',
+              top: '35px',
               left: '50%',
               transform: 'translateX(-50%)',
-              fontSize: '16px',
-              color: '#9aaaba',
+              fontSize: '20px',
+              color: '#99aaba',
               fontWeight: 'bold',
               letterSpacing: '3px'
             }}>NCT</div>
@@ -387,19 +378,7 @@ function MainScreen({ language, user }) {
             }}>▲</div>
           </div>
 
-          {/* Right Arm (Thumb up) */}
-          <div style={{
-            position: 'absolute',
-            top: '90px',
-            right: '-30px',
-            width: '60px',
-            height: '85px',
-            background: 'linear-gradient(145deg, #6a8aaa 0%, #5a7a9a 100%)',
-            borderRadius: '30px',
-            transform: 'rotate(35deg)',
-            transformOrigin: 'top center',
-            boxShadow: '0 8px 25px rgba(0,0,0,0.3)'
-          }}>
+          
             {/* Hand Thumb */}
             <div style={{
               position: 'absolute',
@@ -442,7 +421,7 @@ function MainScreen({ language, user }) {
             color: '#1e3a5f',
             fontWeight: 'bold',
             fontSize: '18px',
-            animation: 'floatUp 0.8s ease-out',
+            animation: 'floatUp 0.4s ease-out',
             boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
             zIndex: 10
           }}>
