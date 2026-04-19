@@ -103,7 +103,7 @@ function MainScreen({ language, user }) {
               borderRadius: '3px',
               overflow: 'hidden'
             }}>
-              <div style={{ width: '70%', height: '100%', background: '#4a90d9' }} />
+              <div style={{ width: '0%', height: '100%', background: '#4a90d9' }} />
             </div>
           </div>
           <div style={{ fontSize: '14px', color: 'white', marginTop: '2px' }}>{level}</div>
