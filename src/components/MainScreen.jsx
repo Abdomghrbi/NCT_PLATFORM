@@ -4,15 +4,15 @@ import WebApp from '@twa-dev/sdk'
 const translations = {
   en: {
     level: 'Lvl',
-    softCoin: 'Soft coin',
+    softCoin: 'coin',
     energy: 'Energy',
-    feed: 'Feed with Knowledge',
+    feed: 'Feed',
     wardrobe: 'Wardrobe NFT',
     play: 'Play in Depth',
     home: 'Home',
     quests: 'Quests',
     rating: 'Rating',
-    wallet: 'TON Wallet'
+    wallet: 'Wallet'
   },
   ru: {
     level: 'Ур',
@@ -30,13 +30,13 @@ const translations = {
 
 function MainScreen({ language, user }) {
   const t = translations[language]
-  const [coins, setCoins] = useState(50300)
-  const [energy, setEnergy] = useState(95)
-  const [level, setLevel] = useState(10)
+  const [coins, setCoins] = useState(0)
+  const [energy, setEnergy] = useState(100)
+  const [level, setLevel] = useState(1)
   const [showTap, setShowTap] = useState(false)
 
   const handleWhaleTap = () => {
-    setCoins(c => c + 5)
+    setCoins(c => c + 1)
     setShowTap(true)
     setTimeout(() => setShowTap(false), 500)
     
