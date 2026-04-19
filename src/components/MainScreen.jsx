@@ -436,17 +436,17 @@ function MainScreen({ language, user }) {
             position: 'absolute',
             top: '15%',
             right: '15%',
-            
+            background: 'gray',
             padding: '10px 18px',
             borderRadius: '25px',
             color: '#1e3a5f',
             fontWeight: 'bold',
             fontSize: '18px',
-            animation: 'floatUp 0.6s ease-out',
+            animation: 'floatUp 0.8s ease-out',
             boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
             zIndex: 10
           }}>
-            +1 $NCT 🐬
+            +1
           </div>
         )}
       </div>
