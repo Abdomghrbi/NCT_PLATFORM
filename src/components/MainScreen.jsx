@@ -32,7 +32,7 @@ function MainScreen({ language, user }) {
   const t = translations[language]
   const [coins, setCoins] = useState(503)
   const [energy, setEnergy] = useState(100)
-  const [level, setLevel] = useState(0)
+  const [level, setLevel] = useState(1)
   const [showTap, setShowTap] = useState(false)
 
   const handleWhaleTap = () => {
@@ -40,7 +40,7 @@ function MainScreen({ language, user }) {
     setShowTap(true)
     setTimeout(() => setShowTap(false), 500)
     
-    if (energy > 0) {
+    if (energy > 1) {
       setEnergy(e => e - 1)
     }
   }
