@@ -67,7 +67,7 @@ function MainScreen({ language, user }) {
           height: '44px',
           borderRadius: '12px',
           background: 'linear-gradient(135deg, #4a90d9, #2e5a8c)',
-          display: 'flex',
+          display: 'none',
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: '24px'
