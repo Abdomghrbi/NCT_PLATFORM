@@ -182,7 +182,7 @@ function MainScreen({ language, user }) {
             position: 'relative',
             cursor: 'pointer',
             transform: showTap ? 'scale(0.92) translateY(10px)' : 'scale(1)',
-            transition: 'all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+            transition: 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
             filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.4))'
           }}
         >
@@ -442,11 +442,11 @@ function MainScreen({ language, user }) {
             color: '#1e3a5f',
             fontWeight: 'bold',
             fontSize: '18px',
-            animation: 'floatUp 0.6s ease-out',
+            animation: 'floatUp 0.8s ease-out',
             boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
             zIndex: 10
           }}>
-            +5 $NCT ❤️
+            +1
           </div>
         )}
       </div>
