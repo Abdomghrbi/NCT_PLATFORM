@@ -30,17 +30,17 @@ const translations = {
 
 function MainScreen({ language, user }) {
   const t = translations[language]
-  const [coins, setCoins] = useState(503)
-  const [energy, setEnergy] = useState(100)
-  const [level, setLevel] = useState(1)
+  const [coins, setCoins] = useState(50300)
+  const [energy, setEnergy] = useState(95)
+  const [level, setLevel] = useState(10)
   const [showTap, setShowTap] = useState(false)
 
   const handleWhaleTap = () => {
-    setCoins(c => c + 1)
+    setCoins(c => c + 5)
     setShowTap(true)
     setTimeout(() => setShowTap(false), 500)
     
-    if (energy > 1) {
+    if (energy > 0) {
       setEnergy(e => e - 1)
     }
   }
@@ -75,7 +75,9 @@ function MainScreen({ language, user }) {
           🐋
         </div>
         <div style={{ flex: 1 }}>
-          
+          <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'white' }}>
+            NCT: {language === 'en' ? 'Community Whale' : 'Кит Сообщества'}
+          </div>
           <div style={{ fontSize: '12px', color: '#7eb8e8' }}>NOTCOIN TOGETHER</div>
         </div>
         <div style={{ color: '#7eb8e8', fontSize: '20px' }}>⋮</div>
@@ -148,7 +150,7 @@ function MainScreen({ language, user }) {
             background: 'transparent',
             left: `${15 + i * 12}%`,
             top: `${20 + i * 10}%`,
-            animation: `float ${2 + i * 0.2}s ease-in-out infinite`
+            animation: `float ${2 + i * 0.5}s ease-in-out infinite`
           }} />
         ))}
 
@@ -162,7 +164,14 @@ function MainScreen({ language, user }) {
           opacity: 0.8
         }}>🪙</div>
         
-        
+        <div style={{
+          position: 'absolute',
+          right: '15%',
+          bottom: '25%',
+          fontSize: '20px',
+          animation: 'float 2.5s ease-in-out infinite 0.5s',
+          opacity: 0.6
+        }}>🪙</div>
 
         {/* Main Whale - CSS Enhanced */}
         <div 
@@ -173,7 +182,7 @@ function MainScreen({ language, user }) {
             position: 'relative',
             cursor: 'pointer',
             transform: showTap ? 'scale(0.92) translateY(10px)' : 'scale(1)',
-            transition: 'all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+            transition: 'all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
             filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.4))'
           }}
         >
@@ -285,8 +294,8 @@ function MainScreen({ language, user }) {
             top: '-15px',
             left: '50%',
             transform: 'translateX(-50%)',
-            width: '100px',
-            height: '40px',
+            width: '110px',
+            height: '45px',
             background: 'linear-gradient(180deg, #f0f0f0 0%, #d0d0d0 100%)',
             borderRadius: '55px 55px 0 0',
             boxShadow: '0 8px 20px rgba(0,0,0,0.3)'
@@ -324,11 +333,11 @@ function MainScreen({ language, user }) {
             {/* NCT Logo */}
             <div style={{
               position: 'absolute',
-              top: '35px',
+              top: '25px',
               left: '50%',
               transform: 'translateX(-50%)',
-              fontSize: '20px',
-              color: '#99aaba',
+              fontSize: '16px',
+              color: '#9aaaba',
               fontWeight: 'bold',
               letterSpacing: '3px'
             }}>NCT</div>
@@ -378,7 +387,19 @@ function MainScreen({ language, user }) {
             }}>▲</div>
           </div>
 
-          
+          {/* Right Arm (Thumb up) */}
+          <div style={{
+            position: 'absolute',
+            top: '90px',
+            right: '-30px',
+            width: '60px',
+            height: '85px',
+            background: 'linear-gradient(145deg, #6a8aaa 0%, #5a7a9a 100%)',
+            borderRadius: '30px',
+            transform: 'rotate(35deg)',
+            transformOrigin: 'top center',
+            boxShadow: '0 8px 25px rgba(0,0,0,0.3)'
+          }}>
             {/* Hand Thumb */}
             <div style={{
               position: 'absolute',
@@ -415,17 +436,17 @@ function MainScreen({ language, user }) {
             position: 'absolute',
             top: '15%',
             right: '15%',
-            background: 'gray',
+            background: 'white',
             padding: '10px 18px',
             borderRadius: '25px',
             color: '#1e3a5f',
             fontWeight: 'bold',
             fontSize: '18px',
-            animation: 'floatUp 0.4s ease-out',
+            animation: 'floatUp 0.6s ease-out',
             boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
             zIndex: 10
           }}>
-            +1
+            +5 $NCT ❤️
           </div>
         )}
       </div>
@@ -433,8 +454,8 @@ function MainScreen({ language, user }) {
       {/* Action Buttons */}
       <div style={{
         display: 'flex',
-        gap: '10px',
-        marginBottom: '15px'
+        gap: '12px',
+        marginBottom: '20px'
       }}>
         <button style={{
           flex: 1,
@@ -497,11 +518,11 @@ function MainScreen({ language, user }) {
         bottom: '0',
         left: '0',
         right: '0',
-        background: 'rgba(200, 238, 245, 0.95)',
+        background: 'rgba(232, 238, 245, 0.95)',
         backdropFilter: 'blur(10px)',
         display: 'flex',
         justifyContent: 'space-around',
-        padding: '10px 0',
+        padding: '12px 0',
         borderTop: '1px solid rgba(0,0,0,0.1)'
       }}>
         <div style={{ textAlign: 'center', color: '#4a90d9' }}>
