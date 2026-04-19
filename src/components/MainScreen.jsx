@@ -436,7 +436,7 @@ function MainScreen({ language, user }) {
             position: 'absolute',
             top: '15%',
             right: '15%',
-            background: 'white',
+            
             padding: '10px 18px',
             borderRadius: '25px',
             color: '#1e3a5f',
@@ -454,8 +454,8 @@ function MainScreen({ language, user }) {
       {/* Action Buttons */}
       <div style={{
         display: 'flex',
-        gap: '12px',
-        marginBottom: '20px'
+        gap: '10px',
+        marginBottom: '15px'
       }}>
         <button style={{
           flex: 1,
