@@ -58,7 +58,7 @@ function MainScreen({ language, user }) {
         borderRadius: '16px',
         padding: '12px 16px',
         marginBottom: '15px',
-        display: 'flex',
+        display: 'none',
         alignItems: 'center',
         gap: '12px'
       }}>
