@@ -182,7 +182,8 @@ function MainScreen({ language, user }) {
             position: 'relative',
             cursor: 'pointer',
             transform: showTap ? 'scale(0.95) translateY(10px)' : 'scale(1)',
-              filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.4))'
+             transition: 'all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+           filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.4))'
   
           }}
         >
