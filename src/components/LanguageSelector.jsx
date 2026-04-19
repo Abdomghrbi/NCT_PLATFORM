@@ -24,7 +24,14 @@ function LanguageSelector({ onSelect }) {
       padding: '20px',
       background: 'linear-gradient(180deg, #1e3a5f 0%, #0d2137 100%)'
     }}>
-      
+      <h1 style={{
+        fontSize: '24px',
+        marginBottom: '40px',
+        color: 'white',
+        textAlign: 'center'
+      }}>
+        NCT: Community Whale
+      </h1>
       
       <div style={{
         display: 'flex',
