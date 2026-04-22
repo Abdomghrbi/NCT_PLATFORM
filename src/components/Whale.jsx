@@ -164,12 +164,12 @@ function Whale({ onTap, showTap }) {
           </linearGradient>
         </defs>
 
-        {/* Tail - Large and visible */}
+        {/* Tail - Large and curved */}
         <path
-          d="M 165 190 Q 200 170 210 140 Q 220 110 200 120 Q 185 130 175 150 Q 170 165 165 180"
+          d="M 160 200 Q 210 180 220 150 Q 230 120 215 130 Q 200 140 190 160 Q 180 180 175 195"
           fill="#3a5a7a"
           stroke="#2a4a6a"
-          strokeWidth="1"
+          strokeWidth="1.5"
         />
 
         {/* Body - Oval shape, taller than wide */}
@@ -181,7 +181,7 @@ function Whale({ onTap, showTap }) {
           fill="url(#bodyGradient)"
         />
 
-        {/* Belly - Oval covering lower part */}
+        {/* Belly with vertical lines (ribs) */}
         <ellipse
           cx="100"
           cy="155"
@@ -190,6 +190,15 @@ function Whale({ onTap, showTap }) {
           fill="url(#bellyGradient)"
           opacity="0.7"
         />
+        
+        {/* Belly vertical lines */}
+        <g opacity="0.3" stroke="#4a6a8a" strokeWidth="2" fill="none">
+          <path d="M 85 140 Q 85 170 85 195" />
+          <path d="M 93 138 Q 93 168 93 198" />
+          <path d="M 100 137 Q 100 167 100 200" />
+          <path d="M 107 138 Q 107 168 107 198" />
+          <path d="M 115 140 Q 115 170 115 195" />
+        </g>
 
         {/* Jacket - Covers lower body */}
         <path
@@ -199,7 +208,7 @@ function Whale({ onTap, showTap }) {
         
         {/* Jacket Details */}
         <rect x="88" y="150" width="24" height="6" rx="3" fill="#4a5a6a" />
-        <polygon points="100,158 95,168 105,168" fill="#c9a227" />
+        <polygon points="100,158 95,168 105,168" fill="#c9a227" stroke="#8a7218" strokeWidth="1" />
 
         {/* NCT Text */}
         <text
@@ -227,12 +236,9 @@ function Whale({ onTap, showTap }) {
           />
           {/* Hand */}
           <circle cx="18" cy="142" r="16" fill="url(#bodyGradient)" />
-          {/* Coin in hand */}
-          <circle cx="18" cy="142" r="13" fill="url(#coinGradient)" />
-          <text x="18" y="147" textAnchor="middle" fill="#8a7218" fontSize="11">▲</text>
         </g>
 
-        {/* Right Arm (Thumb up) */}
+        {/* Right Arm - Thumb up */}
         <g ref={rightArmRef}>
           <ellipse
             cx="172"
@@ -244,8 +250,11 @@ function Whale({ onTap, showTap }) {
           />
           {/* Hand */}
           <circle cx="182" cy="132" r="16" fill="url(#bodyGradient)" />
-          {/* Thumb */}
-          <ellipse cx="188" cy="118" rx="7" ry="11" fill="#5a7a9a" transform="rotate(-15 188 118)" />
+          {/* Thumb up */}
+          <ellipse cx="188" cy="115" rx="7" ry="14" fill="#5a7a9a" transform="rotate(-15 188 115)" />
+          {/* Fingers */}
+          <ellipse cx="192" cy="130" rx="5" ry="9" fill="#4a6a8a" transform="rotate(5 192 130)" />
+          <ellipse cx="188" cy="135" rx="5" ry="8" fill="#4a6a8a" transform="rotate(10 188 135)" />
         </g>
 
         {/* Face Area - Upper body */}
@@ -260,19 +269,19 @@ function Whale({ onTap, showTap }) {
         {/* Eyes - Smaller and higher */}
         <g>
           {/* Left Eye */}
-          <circle cx="72" cy="68" r="14" fill="white" />
-          <circle cx="75" cy="68" r="7" fill="#1a1a2e" />
-          <circle cx="77" cy="65" r="3" fill="white" />
+          <circle cx="72" cy="65" r="13" fill="white" />
+          <circle cx="75" cy="65" r="6.5" fill="#1a1a2e" />
+          <circle cx="77" cy="62" r="2.5" fill="white" />
           
           {/* Right Eye */}
-          <circle cx="128" cy="68" r="14" fill="white" />
-          <circle cx="125" cy="68" r="7" fill="#1a1a2e" />
-          <circle cx="123" cy="65" r="3" fill="white" />
+          <circle cx="128" cy="65" r="13" fill="white" />
+          <circle cx="125" cy="65" r="6.5" fill="#1a1a2e" />
+          <circle cx="123" cy="62" r="2.5" fill="white" />
         </g>
 
         {/* Smile - Curved up */}
         <path
-          d="M 75 95 Q 100 115 125 95"
+          d="M 75 90 Q 100 108 125 90"
           fill="none"
           stroke="#2a4a5a"
           strokeWidth="3"
@@ -280,19 +289,24 @@ function Whale({ onTap, showTap }) {
         />
 
         {/* Blush - Cute effect */}
-        <ellipse cx="58" cy="88" rx="9" ry="5" fill="#ff6b6b" opacity="0.25" />
-        <ellipse cx="142" cy="88" rx="9" ry="5" fill="#ff6b6b" opacity="0.25" />
+        <ellipse cx="58" cy="82" rx="9" ry="5" fill="#ff6b6b" opacity="0.25" />
+        <ellipse cx="142" cy="82" rx="9" ry="5" fill="#ff6b6b" opacity="0.25" />
 
-        {/* Cap - Positioned higher */}
+        {/* Cap - Realistic shape with brim */}
         <path
-          d="M 45 25 Q 100 5 155 25 L 155 42 Q 100 32 45 42 Z"
+          d="M 45 22 Q 100 5 155 22 L 155 38 Q 100 28 45 38 Z"
           fill="url(#capGradient)"
         />
-        <ellipse cx="100" cy="25" rx="55" ry="10" fill="#e0e0e0" />
+        {/* Cap brim */}
+        <path
+          d="M 38 35 Q 100 20 162 35 Q 168 38 162 42 Q 100 32 38 42 Q 32 38 38 35"
+          fill="#e0e0e0"
+        />
+        <ellipse cx="100" cy="22" rx="55" ry="10" fill="#f0f0f0" />
         
         {/* Cap Logo */}
-        <circle cx="100" cy="22" r="11" fill="#4a90d9" />
-        <text x="100" y="26" textAnchor="middle" fill="white" fontSize="9">✈</text>
+        <circle cx="100" cy="20" r="10" fill="#4a90d9" />
+        <text x="100" y="24" textAnchor="middle" fill="white" fontSize="8">✈</text>
       </svg>
 
       {/* Floating Coin Effect */}
