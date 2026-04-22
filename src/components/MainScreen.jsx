@@ -140,62 +140,7 @@ function MainScreen({ language, user }) {
         justifyContent: 'center',
         marginBottom: '20px'
       }}>
-        {/* Bubbles */}
-        {[...Array(6)].map((_, i) => (
-          <div key={i} style={{
-            position: 'absolute',
-            width: `${8 + i * 4}px`,
-            height: `${8 + i * 4}px`,
-            border: '2px solid rgba(255,255,255,0.3)',
-            borderRadius: '50%',
-            background: 'transparent',
-            left: `${15 + i * 12}%`,
-            top: `${20 + i * 10}%`,
-            animation: `float ${2 + i * 0.5}s ease-in-out infinite`
-          }} />
-        ))}
-
-        {/* Floating Coins */}
-        <div style={{
-          position: 'absolute',
-          left: '10%',
-          top: '30%',
-          fontSize: '24px',
-          animation: 'float 3s ease-in-out infinite',
-          opacity: 0.8
-        }}>🪙</div>
-        
-        <div style={{
-          position: 'absolute',
-          right: '15%',
-          bottom: '25%',
-          fontSize: '20px',
-          animation: 'float 2.5s ease-in-out infinite 0.5s',
-          opacity: 0.6
-        }}>🪙</div>
-
-        {/* Whale Component */}
         <Whale onTap={handleWhaleTap} showTap={showTap} />
-
-        {/* Tap Feedback */}
-        {showTap && (
-          <div style={{
-            position: 'absolute',
-            top: '15%',
-            right: '15%',
-            background: 'white',
-            padding: '10px 18px',
-            borderRadius: '25px',
-            color: '#1e3a5f',
-            fontWeight: 'bold',
-            fontSize: '18px',
-            animation: 'floatUp 0.8s ease-out',
-            boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
-            zIndex: 10
-          }}>
-            +1
-          </div>
-        )}
       </div>
 
       {/* Action Buttons */}
@@ -289,17 +234,6 @@ function MainScreen({ language, user }) {
           <div style={{ fontSize: '12px', color: '#7a8a9a' }}>{t.wallet}</div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        @keyframes floatUp {
-          0% { opacity: 1; transform: translateY(0) scale(1); }
-          100% { opacity: 0; transform: translateY(-40px) scale(1.1); }
-        }
-      `}</style>
     </div>
   )
 }
