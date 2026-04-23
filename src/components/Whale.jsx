@@ -167,7 +167,7 @@ function Whale({ onTap, showTap }) {
         {/* Tail - Connected to body, curved and natural */}
         <path
           d="M 165 170 
-             C 185 175, 195 155, 200 140
+             C 185 185, 195 155, 200 140
              C 205 125, 200 115, 190 120
              C 180 125, 175 135, 170 145
              C 168 155, 166 165, 165 170"
