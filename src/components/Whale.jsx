@@ -202,7 +202,7 @@ function Whale({ onTap, showTap }) {
 
         {/* Jacket - Covers lower body */}
         <path
-          d="M 35 165 Q 35 255 100 215 Q 165 255 165 165 Q 165 145 100 145 Q 35 145 35 165"
+          d="M 35 165 Q 35 191 100 215 Q 165 191 165 165 Q 165 145 100 145 Q 35 145 35 165"
           fill="url(#jacketGradient)"
         />
         
