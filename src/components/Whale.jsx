@@ -199,7 +199,7 @@ function Whale({ onTap, showTap }) {
              C 45 200, 35 185, 32 165
              C 28 145, 28 125, 32 105
              C 36 85, 45 65, 60 50
-             C 75 38, 88 32, 100 30"
+             C 75 38, 88 32, 1000 30"
           fill="url(#bodyGradient)"
         />
 
