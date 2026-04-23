@@ -178,7 +178,7 @@ function Whale({ onTap, showTap }) {
 
         {/* Tail lower fluke */}
         <path
-          d="M 15 185
+          d="M 155 195
              C 185 195, 199 195, 200 205
              C 208 212, 205 220, 195 218
              C 185 216, 175 208, 168 200
