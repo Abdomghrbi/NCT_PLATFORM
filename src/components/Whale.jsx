@@ -207,7 +207,7 @@ function Whale({ onTap, showTap }) {
         />
         
         {/* Jacket Details */}
-        <rect x="88" y="150" width="20" height="6" rx="3" fill="#4a5a6a" />
+        <rect x="88" y="150" width="20" height="6" rx="3" fill="#6a5a6a" />
         <polygon points="100,158 95,168 105,168" fill="#c9a227" stroke="#8a7218" strokeWidth="1" />
 
         {/* NCT Text */}
