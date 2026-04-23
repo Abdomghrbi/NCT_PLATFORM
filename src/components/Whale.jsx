@@ -7,73 +7,66 @@ function Whale({ onTap, showTap }) {
   const rightArmRef = useRef(null)
   const coinRef = useRef(null)
   const bubbleRefs = useRef([])
-  const containerRef = useRef(null)
 
-  // تهيئة الحركات الأساسية
   useEffect(() => {
-    // حركة الطفو الهادئة
+    // Idle floating animation
     gsap.to(whaleRef.current, {
-      y: -10,
-      duration: 3,
+      y: -8,
+      duration: 2.5,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut"
     })
 
-    // حركة الذراع اليسرى
+    // Arms swaying
     gsap.to(leftArmRef.current, {
-      rotation: -10,
-      duration: 2.5,
+      rotation: -8,
+      duration: 2,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
-      transformOrigin: "75% 15%"
+      transformOrigin: "80% 20%"
     })
 
-    // حركة الذراع اليمنى (الإبهام للأعلى)
     gsap.to(rightArmRef.current, {
       rotation: 8,
-      duration: 2.5,
+      duration: 2.2,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
-      transformOrigin: "25% 15%"
+      transformOrigin: "20% 20%"
     })
 
-    // حركة الفقاعات
+    // Bubbles floating up
     bubbleRefs.current.forEach((bubble, i) => {
-      if (bubble) {
-        gsap.to(bubble, {
-          y: -50,
-          x: Math.sin(i) * 20,
-          opacity: 0,
-          duration: 3 + i * 0.6,
-          repeat: -1,
-          delay: i * 0.7,
-          ease: "power1.out"
-        })
-      }
+      gsap.to(bubble, {
+        y: -40,
+        x: Math.sin(i) * 15,
+        opacity: 0,
+        duration: 2.5 + i * 0.5,
+        repeat: -1,
+        delay: i * 0.6,
+        ease: "power1.out"
+      })
     })
   }, [])
 
-  // تأثير الضغط والعملة
   useEffect(() => {
     if (showTap) {
-      // تأثير الضغط (Squash & Stretch)
+      // Squash and stretch
       gsap.to(whaleRef.current, {
-        scaleX: 1.05,
-        scaleY: 0.95,
-        duration: 0.1,
+        scaleX: 1.03,
+        scaleY: 0.97,
+        duration: 0.08,
         yoyo: true,
         repeat: 3,
         ease: "power2.out"
       })
 
-      // حركة العملة
-      gsap.fromTo(
-        coinRef.current,
-        { scale: 0.3, opacity: 1, y: 0, x: 0 },
-        { scale: 1.8, opacity: 0, y: -100, x: 30, duration: 0.9, ease: "back.out(2)" }
+      // Coin pop
+      gsap.fromTo(coinRef.current,
+        { scale: 0.5, opacity: 1, y: 0 },
+        { scale: 1.5, opacity: 0, y: -80, duration: 0.8, ease: "back.out(1.7)" }
       )
     }
   }, [showTap])
@@ -83,346 +76,283 @@ function Whale({ onTap, showTap }) {
   }
 
   return (
-    <div
-      ref={containerRef}
+    <div 
       onClick={handleClick}
       style={{
-        width: '280px',
-        height: '340px',
+        width: '260px',
+        height: '320px',
         position: 'relative',
         cursor: 'pointer',
         WebkitTapHighlightColor: 'transparent',
         userSelect: 'none',
         outline: 'none',
-        touchAction: 'manipulation',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        touchAction: 'manipulation'
       }}
     >
-      {/* الفقاعات */}
+      {/* Bubbles */}
       {[...Array(5)].map((_, i) => (
         <div
-          key={`bubble-${i}`}
+          key={i}
           ref={el => bubbleRefs.current[i] = el}
           style={{
             position: 'absolute',
-            width: `${8 + i * 2.5}px`,
-            height: `${8 + i * 2.5}px`,
-            border: '1.5px solid rgba(255,255,255,0.5)',
+            width: `${6 + i * 3}px`,
+            height: `${6 + i * 3}px`,
+            border: '1.5px solid rgba(255,255,255,0.4)',
             borderRadius: '50%',
-            left: `${10 + i * 18}%`,
-            bottom: `${8 + i * 15}%`,
-            zIndex: 1,
-            boxShadow: 'inset -1px -1px 2px rgba(0,0,0,0.1)'
+            left: `${8 + i * 20}%`,
+            bottom: `${5 + i * 18}%`,
+            zIndex: 1
           }}
         />
       ))}
 
-      {/* العملات العائمة في الخلفية */}
-      <div
-        style={{
-          position: 'absolute',
-          left: '8%',
-          top: '20%',
-          fontSize: '26px',
-          opacity: 0.4,
-          animation: 'float 3.5s ease-in-out infinite',
-          pointerEvents: 'none'
-        }}
-      >
-        🪙
-      </div>
+      {/* Floating Coins Background */}
+      <div style={{
+        position: 'absolute',
+        left: '5%',
+        top: '25%',
+        fontSize: '22px',
+        opacity: 0.5,
+        animation: 'float 3s ease-in-out infinite'
+      }}>🪙</div>
 
-      <div
-        style={{
-          position: 'absolute',
-          right: '12%',
-          bottom: '30%',
-          fontSize: '20px',
-          opacity: 0.35,
-          animation: 'float 3s ease-in-out infinite 0.8s',
-          pointerEvents: 'none'
-        }}
-      >
-        🪙
-      </div>
+      <div style={{
+        position: 'absolute',
+        right: '10%',
+        bottom: '35%',
+        fontSize: '18px',
+        opacity: 0.4,
+        animation: 'float 2.5s ease-in-out infinite 0.5s'
+      }}>🪙</div>
 
-      {/* رسم الحوت (SVG) */}
+      {/* Main Whale SVG */}
       <svg
         ref={whaleRef}
         viewBox="0 0 200 240"
         style={{
           width: '100%',
           height: '100%',
-          filter: 'drop-shadow(0 15px 35px rgba(0,0,0,0.25))',
-          zIndex: 5
+          filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))'
         }}
       >
         <defs>
-          {/* تدرجات الألوان */}
           <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#7a9aaa" />
-            <stop offset="50%" stopColor="#5a7a9a" />
+            <stop offset="0%" stopColor="#6a8aaa" />
+            <stop offset="50%" stopColor="#4a6a8a" />
             <stop offset="100%" stopColor="#3a5a7a" />
           </linearGradient>
-
+          
           <linearGradient id="bellyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#9aaabc" />
-            <stop offset="100%" stopColor="#7a8aaa" />
+            <stop offset="0%" stopColor="#8aaaba" />
+            <stop offset="100%" stopColor="#6a8aaa" />
           </linearGradient>
-
+          
           <linearGradient id="capGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="100%" stopColor="#c0c0c0" />
+            <stop offset="0%" stopColor="#f5f5f5" />
+            <stop offset="100%" stopColor="#d0d0d0" />
           </linearGradient>
-
+          
           <linearGradient id="jacketGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#6a7a8a" />
+            <stop offset="0%" stopColor="#5a6a7a" />
             <stop offset="100%" stopColor="#3a4a5a" />
           </linearGradient>
-
+          
           <linearGradient id="coinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#ffd700" />
-            <stop offset="50%" stopColor="#ffed4e" />
             <stop offset="100%" stopColor="#daa520" />
           </linearGradient>
         </defs>
 
-        {/* الذيل */}
+        {/* Tail - Large and curved */}
         <path
-          d="M 160 205 Q 200 180 225 145 Q 240 110 220 120 Q 205 130 190 155 Q 180 185 175 200"
+          d="M 160 200 Q 210 180 220 150 Q 230 120 215 130 Q 200 140 190 160 Q 180 180 175 195"
           fill="#3a5a7a"
           stroke="#2a4a6a"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-
-        {/* الجسم الرئيسي */}
-        <ellipse
-          cx="100"
-          cy="125"
-          rx="78"
-          ry="98"
-          fill="url(#bodyGradient)"
-        />
-
-        {/* البطن */}
-        <ellipse
-          cx="100"
-          cy="160"
-          rx="62"
-          ry="48"
-          fill="url(#bellyGradient)"
-          opacity="0.8"
-        />
-
-        {/* خطوط البطن (الأضلاع) */}
-        <g opacity="0.25" stroke="#4a6a8a" strokeWidth="2.5" fill="none" strokeLinecap="round">
-          <path d="M 82 145 Q 82 170 82 200" />
-          <path d="M 91 142 Q 91 168 91 203" />
-          <path d="M 100 140 Q 100 167 100 205" />
-          <path d="M 109 142 Q 109 168 109 203" />
-          <path d="M 118 145 Q 118 170 118 200" />
-        </g>
-
-        {/* السترة (الجاكيت) */}
-        <path
-          d="M 32 170 Q 32 210 100 220 Q 168 210 168 170 Q 168 148 100 148 Q 32 148 32 170"
-          fill="url(#jacketGradient)"
-          stroke="#2a3a4a"
           strokeWidth="1.5"
         />
 
-        {/* أزرار السترة */}
-        <circle cx="95" cy="158" r="2.5" fill="#c9a227" opacity="0.8" />
-        <circle cx="105" cy="158" r="2.5" fill="#c9a227" opacity="0.8" />
+        {/* Body - Oval shape, taller than wide */}
+        <ellipse
+          cx="100"
+          cy="125"
+          rx="75"
+          ry="95"
+          fill="url(#bodyGradient)"
+        />
 
-        {/* زينة السترة */}
-        <polygon points="100,162 96,172 104,172" fill="#c9a227" stroke="#8a7218" strokeWidth="1" opacity="0.9" />
+        {/* Belly with vertical lines (ribs) */}
+        <ellipse
+          cx="100"
+          cy="155"
+          rx="60"
+          ry="50"
+          fill="url(#bellyGradient)"
+          opacity="0.7"
+        />
+        
+        {/* Belly vertical lines */}
+        <g opacity="0.3" stroke="#4a6a8a" strokeWidth="2" fill="none">
+          <path d="M 85 140 Q 85 170 85 195" />
+          <path d="M 93 138 Q 93 168 93 198" />
+          <path d="M 100 137 Q 100 167 100 200" />
+          <path d="M 107 138 Q 107 168 107 198" />
+          <path d="M 115 140 Q 115 170 115 195" />
+        </g>
 
-        {/* نص NCT */}
+        {/* Jacket - Covers lower body */}
+        <path
+          d="M 35 165 Q 35 200 100 215 Q 165 200 165 165 Q 165 145 100 145 Q 35 145 35 165"
+          fill="url(#jacketGradient)"
+        />
+        
+        {/* Jacket Details */}
+        <rect x="88" y="150" width="20" height="6" rx="3" fill="#4a5a6a" />
+        <polygon points="100,158 95,168 105,168" fill="#c9a227" stroke="#8a7218" strokeWidth="1" />
+
+        {/* NCT Text */}
         <text
           x="100"
-          y="192"
+          y="188"
           textAnchor="middle"
-          fill="#7a8aaa"
-          fontSize="14"
+          fill="#8a9aaa"
+          fontSize="13"
           fontWeight="bold"
-          letterSpacing="2.5"
+          letterSpacing="2"
           fontFamily="Arial, sans-serif"
-          opacity="0.9"
         >
           NCT
         </text>
 
-        {/* الذراع اليسرى */}
-        <g ref={leftArmRef} style={{ transformOrigin: '28px 115px' }}>
-          {/* العضد */}
+        {/* Left Arm */}
+        <g ref={leftArmRef}>
           <ellipse
             cx="28"
-            cy="110"
-            rx="18"
-            ry="35"
+            cy="115"
+            rx="20"
+            ry="32"
             fill="url(#bodyGradient)"
-            transform="rotate(-28 28 110)"
+            transform="rotate(-25 28 115)"
           />
-          {/* اليد */}
-          <circle cx="15" cy="145" r="18" fill="url(#bodyGradient)" stroke="#2a4a6a" strokeWidth="1" />
-          {/* الأصابع */}
-          <ellipse cx="8" cy="138" rx="4" ry="8" fill="#4a6a8a" transform="rotate(-20 8 138)" />
-          <ellipse cx="8" cy="152" rx="4" ry="8" fill="#4a6a8a" transform="rotate(20 8 152)" />
-          <ellipse cx="20" cy="158" rx="5" ry="7" fill="#3a5a7a" />
+          {/* Hand */}
+          <circle cx="18" cy="142" r="16" fill="url(#bodyGradient)" />
         </g>
 
-        {/* الذراع اليمنى مع الإبهام للأعلى */}
-        <g ref={rightArmRef} style={{ transformOrigin: '172px 105px' }}>
-          {/* العضد */}
+        {/* Right Arm - Thumb up */}
+        <g ref={rightArmRef}>
           <ellipse
             cx="172"
             cy="105"
-            rx="18"
-            ry="35"
+            rx="20"
+            ry="32"
             fill="url(#bodyGradient)"
-            transform="rotate(28 172 105)"
+            transform="rotate(25 172 105)"
           />
-          {/* اليد */}
-          <circle cx="185" cy="140" r="18" fill="url(#bodyGradient)" stroke="#2a4a6a" strokeWidth="1" />
-          {/* الإبهام للأعلى */}
-          <ellipse cx="195" cy="108" rx="8" ry="16" fill="#5a7a9a" transform="rotate(-20 195 108)" stroke="#2a4a6a" strokeWidth="1" />
-          {/* الأصابع */}
-          <ellipse cx="198" cy="135" rx="5" ry="9" fill="#4a6a8a" transform="rotate(15 198 135)" />
-          <ellipse cx="192" cy="152" rx="5" ry="8" fill="#3a5a7a" transform="rotate(10 192 152)" />
+          {/* Hand */}
+          <circle cx="182" cy="132" r="16" fill="url(#bodyGradient)" />
+          {/* Thumb up */}
+          <ellipse cx="188" cy="115" rx="7" ry="14" fill="#5a7a9a" transform="rotate(-15 188 115)" />
+          {/* Fingers */}
+          <ellipse cx="192" cy="130" rx="5" ry="9" fill="#4a6a8a" transform="rotate(5 192 130)" />
+          <ellipse cx="188" cy="135" rx="5" ry="8" fill="#4a6a8a" transform="rotate(10 188 135)" />
         </g>
 
-        {/* منطقة الوجه */}
+        {/* Face Area - Upper body */}
         <ellipse
           cx="100"
-          cy="75"
-          rx="68"
-          ry="58"
+          cy="80"
+          rx="65"
+          ry="55"
           fill="url(#bodyGradient)"
         />
 
-        {/* العيون */}
+        {/* Eyes - Smaller and higher */}
         <g>
-          {/* العين اليسرى */}
-          <circle cx="70" cy="62" r="14" fill="white" stroke="#d0d0d0" strokeWidth="0.5" />
-          <circle cx="73" cy="63" r="7" fill="#1a1a2e" />
-          <circle cx="75" cy="60" r="3" fill="white" opacity="0.9" />
-
-          {/* العين اليمنى */}
-          <circle cx="130" cy="62" r="14" fill="white" stroke="#d0d0d0" strokeWidth="0.5" />
-          <circle cx="127" cy="63" r="7" fill="#1a1a2e" />
-          <circle cx="125" cy="60" r="3" fill="white" opacity="0.9" />
+          {/* Left Eye */}
+          <circle cx="72" cy="65" r="13" fill="white" />
+          <circle cx="75" cy="65" r="6.5" fill="#1a1a2e" />
+          <circle cx="77" cy="62" r="2.5" fill="white" />
+          
+          {/* Right Eye */}
+          <circle cx="128" cy="65" r="13" fill="white" />
+          <circle cx="125" cy="65" r="6.5" fill="#1a1a2e" />
+          <circle cx="123" cy="62" r="2.5" fill="white" />
         </g>
 
-        {/* الأنف */}
-        <g>
-          <ellipse cx="100" cy="85" rx="5" ry="4" fill="#4a6a8a" />
-          <path d="M 100 89 L 98 93 M 100 89 L 102 93" stroke="#4a6a8a" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-        </g>
-
-        {/* الفم (الابتسامة) */}
+        {/* Smile - Curved up */}
         <path
-          d="M 75 95 Q 100 110 125 95"
+          d="M 75 90 Q 100 108 125 90"
           fill="none"
           stroke="#2a4a5a"
-          strokeWidth="3.5"
+          strokeWidth="3"
           strokeLinecap="round"
-          opacity="0.9"
         />
 
-        {/* الخدود (للحلاوة) */}
-        <ellipse cx="55" cy="78" rx="11" ry="6" fill="#ff6b6b" opacity="0.2" />
-        <ellipse cx="145" cy="78" rx="11" ry="6" fill="#ff6b6b" opacity="0.2" />
+        {/* Blush - Cute effect */}
+        <ellipse cx="58" cy="82" rx="9" ry="5" fill="#ff6b6b" opacity="0.25" />
+        <ellipse cx="142" cy="82" rx="9" ry="5" fill="#ff6b6b" opacity="0.25" />
 
-        {/* القبعة */}
-        <defs>
-          <filter id="capShadow">
-            <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.3" />
-          </filter>
-        </defs>
-
-        {/* قمة القبعة */}
-        <ellipse cx="100" cy="18" rx="60" ry="15" fill="url(#capGradient)" filter="url(#capShadow)" />
-        {/* جسم القبعة */}
+        {/* Cap - Realistic shape with brim */}
         <path
-          d="M 40 22 Q 100 8 160 22 L 158 40 Q 100 28 42 40 Z"
+          d="M 45 22 Q 100 5 155 22 L 155 38 Q 100 28 45 38 Z"
           fill="url(#capGradient)"
         />
-        {/* حافة القبعة */}
+        {/* Cap brim */}
         <path
-          d="M 35 38 Q 100 18 165 38 Q 172 42 165 46 Q 100 34 35 46 Q 28 42 35 38"
-          fill="#e5e5e5"
+          d="M 38 35 Q 100 20 162 35 Q 168 38 162 42 Q 100 32 38 42 Q 32 38 38 35"
+          fill="#e0e0e0"
         />
-
-        {/* شعار القبعة */}
-        <circle cx="100" cy="18" r="11" fill="#4a90d9" stroke="#2a6ab0" strokeWidth="0.5" />
-        <text x="100" y="22" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">✈</text>
+        <ellipse cx="100" cy="22" rx="55" ry="10" fill="#f0f0f0" />
+        
+        {/* Cap Logo */}
+        <circle cx="100" cy="20" r="10" fill="#4a90d9" />
+        <text x="100" y="24" textAnchor="middle" fill="white" fontSize="8">✈</text>
       </svg>
 
-      {/* تأثير العملة العائمة */}
+      {/* Floating Coin Effect */}
       <div
         ref={coinRef}
         style={{
           position: 'absolute',
-          top: '20%',
-          right: '25%',
-          fontSize: '36px',
+          top: '15%',
+          right: '20%',
+          fontSize: '30px',
           opacity: 0,
           pointerEvents: 'none',
-          zIndex: 10,
-          filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))'
+          zIndex: 10
         }}
       >
         🪙
       </div>
 
-      {/* رسالة التصفيق */}
+      {/* Tap Feedback */}
       {showTap && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '5%',
-            right: '5%',
-            background: 'linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%)',
-            padding: '10px 18px',
-            borderRadius: '25px',
-            color: '#1e3a5f',
-            fontWeight: 'bold',
-            fontSize: '18px',
-            animation: 'floatUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',
-            boxShadow: '0 6px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.6)',
-            zIndex: 10,
-            fontFamily: 'Arial, sans-serif',
-            letterSpacing: '1px'
-          }}
-        >
+        <div style={{
+          position: 'absolute',
+          top: '8%',
+          right: '8%',
+          background: 'white',
+          padding: '8px 16px',
+          borderRadius: '20px',
+          color: '#1e3a5f',
+          fontWeight: 'bold',
+          fontSize: '16px',
+          animation: 'floatUp 0.6s ease-out',
+          boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+          zIndex: 10
+        }}>
           +1
         </div>
       )}
 
-      {/* الأنماط والحركات */}
       <style>{`
         @keyframes float {
-          0%, 100% { 
-            transform: translateY(0px); 
-          }
-          50% { 
-            transform: translateY(-18px); 
-          }
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
         }
-        
         @keyframes floatUp {
-          0% { 
-            opacity: 1; 
-            transform: translateY(0) scale(1); 
-          }
-          100% { 
-            opacity: 0; 
-            transform: translateY(-60px) scale(1.3); 
-          }
+          0% { opacity: 1; transform: translateY(0) scale(1); }
+          100% { opacity: 0; transform: translateY(-50px) scale(1.2); }
         }
       `}</style>
     </div>
