@@ -88,9 +88,9 @@ function Whale({ onTap, showTap }) {
       gsap.to(whaleRef.current, {
         scaleX: 1.06,       // تمدد أفقي ٣٪
         scaleY: 0.97,       // انضغاط عمودي ٣٪
-        duration: 0.08,     // سريع جداً (٨٠ ملي ثانية)
+        duration: 0.06,     // سريع جداً (٨٠ ملي ثانية)
         yoyo: true,         // يرجع لشكله الأصلي
-        repeat: 1,          // يكرر ٣ مرات (اهتزاز خفيف)
+        repeat: 3,          // يكرر ٣ مرات (اهتزاز خفيف)
         ease: "power2.out"
       })
 
