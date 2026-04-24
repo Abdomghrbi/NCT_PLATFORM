@@ -179,15 +179,6 @@ function Whale({ onTap, showTap }) {
           opacity="0.7"
         />
 
-        {/* Belly vertical lines (ribs) */}
-        <g opacity="0.3" stroke="#4a6a8a" strokeWidth="1.5" fill="none">
-          <path d="M 75 175 Q 75 195 78 210" />
-          <path d="M 88 172 Q 88 192 90 212" />
-          <path d="M 100 170 Q 100 190 100 213" />
-          <path d="M 112 172 Q 112 192 110 212" />
-          <path d="M 125 175 Q 125 195 122 210" />
-        </g>
-
     
 
         {/* Arms/Flippers */}
