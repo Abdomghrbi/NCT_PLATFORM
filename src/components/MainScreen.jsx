@@ -216,6 +216,7 @@ function MainScreen({ language, user }) {
         justifyContent: 'space-around',
         padding: '10px 5px',
         borderRadius: '16px',
+        marginBottom: '10px',
     }}>
         <div style={{ textAlign: 'center', color: '#4a90d9' }}>
           <div style={{ fontSize: '24px', marginBottom: '4px' }}>🏠</div>
