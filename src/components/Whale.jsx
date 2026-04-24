@@ -79,7 +79,7 @@ function Whale({ onTap, showTap }) {
     <div 
       onClick={handleClick}
       style={{
-        width: '260px',
+        width: '360px',
         height: '320px',
         position: 'relative',
         cursor: 'pointer',
