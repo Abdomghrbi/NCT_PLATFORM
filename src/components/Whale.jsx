@@ -21,7 +21,7 @@ function Whale({ onTap, showTap }) {
     // Arms swaying
     gsap.to(leftArmRef.current, {
       rotation: -8,
-      duration: 2,
+      duration: 2.5,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
@@ -80,7 +80,7 @@ function Whale({ onTap, showTap }) {
       onClick={handleClick}
       style={{
         width: '360px',
-        height: '380px',
+        height: '340px',
         position: 'relative',
         cursor: 'pointer',
         WebkitTapHighlightColor: 'transparent',
