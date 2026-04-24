@@ -203,8 +203,8 @@ function Whale({ onTap, showTap }) {
         {/* Face */}
         <g>
           {/* بياض العين */}
-          <ellipse cx="75" cy="75" rx="14" ry="16" fill="#FFFFFF" />
-          <ellipse cx="15" cy="75" rx="14" ry="16" fill="#FFFFFF" />
+          <ellipse cx="75" cy="75" rx="14" ry="14" fill="#FFFFFF" />
+          <ellipse cx="125" cy="75" rx="14" ry="14" fill="#FFFFFF" />
 
           {/* البؤبؤ */}
           <circle cx="75" cy="75" r="7" fill="#1a1a2e" />
