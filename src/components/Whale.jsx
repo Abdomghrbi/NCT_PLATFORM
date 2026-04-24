@@ -247,12 +247,8 @@ function Whale({ onTap, showTap }) {
 
         {/* Captain Hat */}
         <g>
-          {/* Hat brim */}
-          <ellipse cx="100" cy="42" rx="55" ry="10" fill="#f5f5f5" stroke="#d0d0d0" strokeWidth="1" />
-
-          {/* Hat top */}
-          <path
-            d="M 68.565 44.481 Q 70.351 16.58 106.564 12.406 Q 140.058 17.098 143.619 43.958"
+        
+          <path d="M 68.565 44.481 Q 70.351 16.58 106.564 12.406 Q 140.058 17.098 143.619 43.958"
             fill="url(#capGradient)"
             stroke="#d0d0d0"
             strokeWidth="1"
