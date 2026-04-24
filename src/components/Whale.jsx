@@ -172,7 +172,7 @@ function Whale({ onTap, showTap }) {
           fill="url(#bodyGradient)"
         />
 
-        {/* اللون الرمادي بطن الحو*/}
+        {/* اللون الرمادي بطن الحوت */}
         <path
           d="M 108.176 231.372 C 119.657 235.594 143.306 238.606 155.76 232.54 C 128.055 238.892 122.375 204.611 127.893 165.857 C 131.287 144.849 134.014 132.351 126.027 127.705 C 122.123 125.102 114.163 123.727 99.583 122.842 C 76.762 122.683 69.379 123.064 62.144 129.306 C 51.476 142.065 64.55 172.131 71.089 189.298 C 79.172 205.527 82.143 219.286 107.373 230.561"
            fill="url(#bellyGradient)"
@@ -181,14 +181,10 @@ function Whale({ onTap, showTap }) {
 
     
 
-        {/* Arms/Flippers */}
+        {/* اليدين */}
         <g ref={leftArmRef}>
           <path
-            d="M 45 110
-               Q 20 120, 15 140
-               Q 10 160, 25 165
-               Q 35 160, 40 145
-               Q 45 130, 45 110"
+            d="M 47.695 108.12 Q 20 120 14.966 141.535 Q 10 160 25 165 Q 36.682 159.54 41.556 145.332 Q 45 130 47.808 108.051"
             fill="#4a6a8a"
             stroke="#3a5a7a"
             strokeWidth="1"
@@ -206,19 +202,19 @@ function Whale({ onTap, showTap }) {
 
         {/* Face */}
         <g>
-          {/* Eyes - White sclera */}
+          {/* بياض العين */}
           <ellipse cx="75" cy="75" rx="14" ry="16" fill="#FFFFFF" />
-          <ellipse cx="125" cy="75" rx="14" ry="16" fill="#FFFFFF" />
+          <ellipse cx="15" cy="75" rx="14" ry="16" fill="#FFFFFF" />
 
-          {/* Pupils */}
+          {/* البؤبؤ */}
           <circle cx="75" cy="75" r="7" fill="#1a1a2e" />
           <circle cx="125" cy="75" r="7" fill="#1a1a2e" />
 
-          {/* Eye highlights */}
+          {/* ابراز العينين */}
           <circle cx="77" cy="72" r="2.5" fill="#FFFFFF" />
           <circle cx="127" cy="72" r="2.5" fill="#FFFFFF" />
 
-          {/* Cheeks - Pink blush */}
+          {/* الخدود */}
           <ellipse cx="60" cy="92" rx="10" ry="6" fill="#ff9999" opacity="0.4" />
           <ellipse cx="140" cy="92" rx="10" ry="6" fill="#ff9999" opacity="0.4" />
 
@@ -241,7 +237,7 @@ function Whale({ onTap, showTap }) {
           />
         </g>
 
-        {/* Captain Hat */}
+        {/* القبعة */}
         <g>
         
           <path d="M 71.013 44.394 C 69.607 44.177 48 9.447 143.702 43.877 Q 58.654 51.176 89.392 17.819 Q 132.812 -2.462 145.122 45.605"
@@ -253,7 +249,7 @@ function Whale({ onTap, showTap }) {
 
           
 
-          {/* Anchor badge */}
+          {/* رمز المرساة */}
           <circle cx="100" cy="25" r="8" fill="#4a90e2" />
           <text
             x="100"
