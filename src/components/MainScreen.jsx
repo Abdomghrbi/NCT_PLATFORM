@@ -210,11 +210,11 @@ function MainScreen({ language, user }) {
         bottom: '0',
         left: '0',
         right: '0',
-        background: 'rgba(232, 238, 245, 0.95)',
+        background: 'rgba(250, 238, 245, 0.95)',
         backdropFilter: 'blur(10px)',
         display: 'flex',
         justifyContent: 'space-around',
-        padding: '12px 0',
+        padding: '10px 5px',
         borderTop: '1px solid rgba(0,0,0,0.1)'
       }}>
         <div style={{ textAlign: 'center', color: '#4a90d9' }}>
