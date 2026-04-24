@@ -51,7 +51,7 @@ function MainScreen({ language, user }) {
       minHeight: '100vh',
       background: 'linear-gradient(180deg, #4a90d9 0%, #1e3a5f 50%, #0d2137 100%)',
       padding: '10px',
-      paddingBottom: '80px'
+      paddingBottom: '40px'
     }}>
       {/* Header */}
       <div style={{
