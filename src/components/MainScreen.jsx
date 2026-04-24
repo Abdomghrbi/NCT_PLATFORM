@@ -215,7 +215,6 @@ function MainScreen({ language, user }) {
         display: 'flex',
         justifyContent: 'space-around',
         padding: '10px 5px',
-        borderTop: '1px solid rgba(0,0,0,0.1)'
         borderRadius: '16px',
     }}>
         <div style={{ textAlign: 'center', color: '#4a90d9' }}>
