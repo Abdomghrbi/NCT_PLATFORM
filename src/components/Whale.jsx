@@ -80,7 +80,7 @@ function Whale({ onTap, showTap }) {
       onClick={handleClick}
       style={{
         width: '360px',
-        height: '320px',
+        height: '340px',
         position: 'relative',
         cursor: 'pointer',
         WebkitTapHighlightColor: 'transparent',
