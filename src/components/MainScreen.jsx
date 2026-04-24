@@ -134,7 +134,7 @@ function MainScreen({ language, user }) {
       {/* Whale Character Area */}
       <div style={{
         position: 'relative',
-        height: '340px',
+        height: '360px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
