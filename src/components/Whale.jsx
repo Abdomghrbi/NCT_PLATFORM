@@ -164,21 +164,7 @@ function Whale({ onTap, showTap }) {
           </linearGradient>
         </defs>
 
-        {/* Tail - Connected to body, curved and natural */}
-        <path
-          d="M 168.685 178.449 C 173.216 187.137 182.418 171.899 184.395 169.787 C 193.564 153.215 177.733 156.928 178.58 144.456 C 179.82 138.818 177.572 138.324 170 145 C 163.026 153.25 159.303 163.558 167.94 177.761"
-          fill="#3a5a7a"
-          stroke="#2a4a6a"
-          strokeWidth="1"
-        />
-
-        {/* Tail lower fluke */}
-        <path
-          d="M199 214C193 210 205 203 217 196 227 194 228 193 238 195 255 185 256 186 247 203 236 220 213 221 204 219"
-          fill="#3a5a7a"
-          stroke="#2a4a6a"
-          strokeWidth="1"
-        />
+        
 
         {/* Body - Natural whale shape, connected to tail */}
         <path
