@@ -164,10 +164,40 @@ function Whale({ onTap, showTap }) {
           </linearGradient>
         </defs>
 
+        {/* Tail - Connected to body, curved and natural */}
+        <path
+          d="M 168.685 178.449 C 173.216 187.137 182.418 171.899 184.395 169.787 C 193.564 153.215 177.733 156.928 178.58 144.456 C 179.82 138.818 177.572 138.324 170 145 C 163.026 153.25 159.303 163.558 167.94 177.761"
+          fill="#3a5a7a"
+          stroke="#2a4a6a"
+          strokeWidth="1"
+        />
 
-        
+        {/* Tail lower fluke */}
+        <path
+          d="M199 214C193 210 205 203 217 196 227 194 228 193 238 195 255 185 256 186 247 203 236 220 213 221 204 219"
+          fill="#3a5a7a"
+          stroke="#2a4a6a"
+          strokeWidth="1"
+        />
 
-        
+        {/* Body - Natural whale shape, connected to tail */}
+        <path
+          d="M 159.784 238.631 C 89.54 264.315 49 190 39.962 120.704 C 38 74 55 57 60 50 C 75 38 88 32 100 30 C 130 30 155 45 165 70 C 172 90 172 115 167.974 150.926 C 166.0487 172.6703 161.536 188.349 153.018 200.653 C 140.632 218.61 170.658 216.53 171.88 209.776 C 192.775 191.39 195.694 201.782 172.163 229.425 Z"
+          fill="url(#bodyGradient)"
+        />
+
+        {/* Belly - Lighter area on bottom */}
+        <path
+          d="M 60 210
+             C 75 218, 95 220, 115 215
+             C 135 210, 148 200, 155 185
+             C 150 175, 140 168, 125 165
+             C 110 162, 95 162, 80 165
+             C 65 168, 55 175, 50 185
+             C 52 195, 55 205, 60 210"
+          fill="url(#bellyGradient)"
+          opacity="0.7"
+        />
 
         {/* Belly vertical lines (ribs) */}
         <g opacity="0.3" stroke="#4a6a8a" strokeWidth="1.5" fill="none">
