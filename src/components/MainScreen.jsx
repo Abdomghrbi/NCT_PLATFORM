@@ -210,7 +210,7 @@ function MainScreen({ language, user }) {
         bottom: '0',
         left: '0',
         right: '0',
-        background: 'rgba(250, 238, 245, 0.95)',
+        background: 'linear-gradient(135deg, #4a90d9, #2e5a8c)',
         backdropFilter: 'blur(10px)',
         display: 'flex',
         justifyContent: 'space-around',
