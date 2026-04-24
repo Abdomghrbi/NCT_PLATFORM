@@ -212,46 +212,7 @@ function Whale({ onTap, showTap }) {
           <path d="M 125 175 Q 125 195 122 210" />
         </g>
 
-        {/* Jacket - Covers lower body */}
-        <path
-          d="M 45 165
-             Q 45 185 60 195
-             Q 80 205 100 205
-             Q 120 205 140 195
-             Q 155 185 155 165
-             Q 155 150 140 145
-             Q 120 140 100 140
-             Q 80 140 60 145
-             Q 45 150 45 165"
-          fill="url(#jacketGradient)"
-        />
-
-        {/* Jacket collar */}
-        <path
-          d="M 60 145 Q 80 155 100 155 Q 120 155 140 145"
-          fill="none"
-          stroke="#2a3a4a"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-
-        {/* Jacket buttons */}
-        <circle cx="100" cy="160" r="3" fill="#ffd700" />
-        <circle cx="100" cy="172" r="3" fill="#ffd700" />
-        <circle cx="100" cy="184" r="3" fill="#ffd700" />
-
-        {/* NCT Logo on Jacket */}
-        <text
-          x="100"
-          y="190"
-          textAnchor="middle"
-          fill="#ffd700"
-          fontSize="12"
-          fontWeight="bold"
-          fontFamily="Arial, sans-serif"
-        >
-          NCT
-        </text>
+    
 
         {/* Arms/Flippers */}
         <g ref={leftArmRef}>
@@ -332,14 +293,7 @@ function Whale({ onTap, showTap }) {
             strokeWidth="1"
           />
 
-          {/* Hat band */}
-          <path
-            d="M 58 38 Q 100 42, 142 38"
-            fill="none"
-            stroke="#4a90e2"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
+          
 
           {/* Anchor badge */}
           <circle cx="100" cy="25" r="8" fill="#4a90e2" />
