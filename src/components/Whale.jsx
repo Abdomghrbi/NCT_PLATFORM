@@ -197,11 +197,7 @@ function Whale({ onTap, showTap }) {
 
         <g ref={rightArmRef}>
           <path
-            d="M 155 110
-               Q 180 120, 185 140
-               Q 190 160, 175 165
-               Q 165 160, 160 145
-               Q 155 130, 155 110"
+            d="M 155.765 104.998 Q 180 120 186.533 140.693 Q 190 160 175 165 Q 165.235 164.453 158.986 147 Q 152.578 116.802 155.735 104.998"
             fill="#4a6a8a"
             stroke="#3a5a7a"
             strokeWidth="1"
@@ -226,7 +222,7 @@ function Whale({ onTap, showTap }) {
           <ellipse cx="60" cy="92" rx="10" ry="6" fill="#ff9999" opacity="0.4" />
           <ellipse cx="140" cy="92" rx="10" ry="6" fill="#ff9999" opacity="0.4" />
 
-          {/* Smile */}
+          {/* خط الابتسامة */}
           <path
             d="M 85 95 Q 100 108, 115 95"
             fill="none"
@@ -235,7 +231,7 @@ function Whale({ onTap, showTap }) {
             strokeLinecap="round"
           />
 
-          {/* Small mouth line */}
+          {/* الفم السفلي */}
           <path
             d="M 95 102 Q 100 105, 105 102"
             fill="none"
