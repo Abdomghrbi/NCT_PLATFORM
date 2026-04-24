@@ -252,9 +252,7 @@ function Whale({ onTap, showTap }) {
 
           {/* Hat top */}
           <path
-            d="M 55 42
-               Q 55 15, 100 12
-               Q 145 15, 145 42"
+            d="M 68.565 44.481 Q 70.351 16.58 106.564 12.406 Q 140.058 17.098 143.619 43.958"
             fill="url(#capGradient)"
             stroke="#d0d0d0"
             strokeWidth="1"
