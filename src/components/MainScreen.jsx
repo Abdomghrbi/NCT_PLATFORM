@@ -29,21 +29,84 @@ const translations = {
   }
 }
 
-function MainScreen({ language, user }) {
+function MainScreen({ language, user, supabase }) {
   const t = translations[language]
   const [coins, setCoins] = useState(0)
   const [energy, setEnergy] = useState(100)
   const [level, setLevel] = useState(1)
   const [showTap, setShowTap] = useState(false)
 
-  const handleWhaleTap = () => {
-    setCoins(c => c + 1)
+  // تحميل البيانات من Supabase أول ما يفتح
+  useEffect(() => {
+    if (user?.telegram_id) {
+      loadUserData()
+    }
+  }, [user])
+
+  // تجديد الطاقة تلقائياً كل دقيقة
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setEnergy(prev => {
+        if (prev < 100) {
+          const newEnergy = prev + 1
+          saveEnergyToSupabase(newEnergy)
+          return newEnergy
+        }
+        return prev
+      })
+    }, 60000) // كل دقيقة
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const loadUserData = async () => {
+    const { data, error } = await supabase
+      .from('users')
+      .select('coins, energy, level')
+      .eq('telegram_id', user.telegram_id)
+      .single()
+
+    if (data) {
+      setCoins(data.coins || 0)
+      setEnergy(data.energy || 100)
+      setLevel(data.level || 1)
+    }
+  }
+
+  const saveToSupabase = async (newCoins, newEnergy) => {
+    if (!user?.telegram_id) return
+    
+    await supabase
+      .from('users')
+      .update({ 
+        coins: newCoins,
+        energy: newEnergy
+      })
+      .eq('telegram_id', user.telegram_id)
+  }
+
+  const saveEnergyToSupabase = async (newEnergy) => {
+    if (!user?.telegram_id) return
+    
+    await supabase
+      .from('users')
+      .update({ energy: newEnergy })
+      .eq('telegram_id', user.telegram_id)
+  }
+
+  const handleWhaleTap = async () => {
+    if (energy <= 0) return
+    
+    const newCoins = coins + 1
+    const newEnergy = energy - 1
+    
+    setCoins(newCoins)
+    setEnergy(newEnergy)
     setShowTap(true)
     setTimeout(() => setShowTap(false), 500)
     
-    if (energy > 0) {
-      setEnergy(e => e - 1)
-    }
+    // حفظ بـ Supabase
+    await saveToSupabase(newCoins, newEnergy)
   }
 
   return (
@@ -104,7 +167,7 @@ function MainScreen({ language, user }) {
               borderRadius: '3px',
               overflow: 'hidden'
             }}>
-              <div style={{ width: '0%', height: '100%', background: '#4a90d9' }} />
+              <div style={{ width: `${(energy/100)*100}%`, height: '100%', background: '#4a90d9' }} />
             </div>
           </div>
           <div style={{ fontSize: '14px', color: 'white', marginTop: '2px' }}>{level}</div>
