@@ -3,7 +3,6 @@ import WebApp from '@twa-dev/sdk'
 import { createClient } from '@supabase/supabase-js'
 import MainScreen from './components/MainScreen'
 
-// Supabase config 
 const SUPABASE_URL = 'https://cbeakjxerompqieklvag.supabase.co'
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNiZWFranhlcm9tcHFpZWtsdmFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxMzA1NTAsImV4cCI6MjA5MjcwNjU1MH0.xfa6HMg2cAjRm1fZmEbcD9lhPm1WOoua6P1pbntkxPA'
 
@@ -13,6 +12,7 @@ function App() {
   const [language, setLanguage] = useState('en')
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     WebApp.ready()
@@ -23,6 +23,7 @@ function App() {
     if (initData?.user) {
       handleTelegramLogin(initData.user)
     } else {
+      setError('open_in_telegram')
       setLoading(false)
     }
   }, [])
@@ -33,11 +34,15 @@ function App() {
       setLanguage(userLanguage)
       document.documentElement.lang = userLanguage
 
-      const { data: existingUser } = await supabase
+      const { data: existingUser, error: fetchError } = await supabase
         .from('users')
         .select('*')
         .eq('telegram_id', tgUser.id)
         .single()
+
+      if (fetchError && fetchError.code !== 'PGRST116') {
+        throw fetchError
+      }
 
       if (existingUser) {
         await supabase
@@ -47,7 +52,7 @@ function App() {
         
         setUser(existingUser)
       } else {
-        const { data: newUser } = await supabase
+        const { data: newUser, error: insertError } = await supabase
           .from('users')
           .insert({
             telegram_id: tgUser.id,
@@ -63,10 +68,12 @@ function App() {
           .select()
           .single()
 
+        if (insertError) throw insertError
         setUser(newUser)
       }
     } catch (error) {
       console.error('Login error:', error)
+      setError('database_error')
     } finally {
       setLoading(false)
     }
@@ -80,9 +87,54 @@ function App() {
         alignItems: 'center',
         justifyContent: 'center',
         background: 'linear-gradient(180deg, #1e3a5f 0%, #0d2137 100%)',
-        color: 'white'
+        color: 'white',
+        fontSize: '18px'
       }}>
         Loading...
+      </div>
+    )
+  }
+
+  if (error === 'open_in_telegram') {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(180deg, #1e3a5f 0%, #0d2137 100%)',
+        color: 'white',
+        padding: '20px',
+        textAlign: 'center'
+      }}>
+        <div style={{ fontSize: '48px', marginBottom: '20px' }}>📱</div>
+        <h2 style={{ marginBottom: '10px' }}>Open in Telegram</h2>
+        <p style={{ color: '#7eb8e8', maxWidth: '280px' }}>
+          This app must be opened through Telegram to work properly.
+        </p>
+      </div>
+    )
+  }
+
+  if (error === 'database_error') {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(180deg, #1e3a5f 0%, #0d2137 100%)',
+        color: 'white',
+        padding: '20px',
+        textAlign: 'center'
+      }}>
+        <div style={{ fontSize: '48px', marginBottom: '20px' }}>⚠️</div>
+        <h2 style={{ marginBottom: '10px' }}>Connection Error</h2>
+        <p style={{ color: '#7eb8e8' }}>
+          Unable to connect to database. Please try again.
+        </p>
       </div>
     )
   }
