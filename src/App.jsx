@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import WebApp from '@twa-dev/sdk'
 import { createClient } from '@supabase/supabase-js'
-import LanguageSelector from './components/LanguageSelector'
 import MainScreen from './components/MainScreen'
 
 // Supabase config 
@@ -11,7 +10,7 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 function App() {
-  const [language, setLanguage] = useState(null)
+  const [language, setLanguage] = useState('en')
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -30,6 +29,10 @@ function App() {
 
   const handleTelegramLogin = async (tgUser) => {
     try {
+      const userLanguage = tgUser.language_code === 'ru' ? 'ru' : 'en'
+      setLanguage(userLanguage)
+      document.documentElement.lang = userLanguage
+
       const { data: existingUser } = await supabase
         .from('users')
         .select('*')
@@ -52,6 +55,7 @@ function App() {
             first_name: tgUser.first_name,
             last_name: tgUser.last_name,
             photo_url: tgUser.photo_url,
+            language: userLanguage,
             coins: 0,
             energy: 100,
             level: 1
@@ -68,19 +72,6 @@ function App() {
     }
   }
 
-  const handleLanguageSelect = (lang) => {
-    setLanguage(lang)
-    document.documentElement.lang = lang
-    localStorage.setItem('nct-language', lang)
-    
-    if (user) {
-      supabase
-        .from('users')
-        .update({ language: lang })
-        .eq('telegram_id', user.telegram_id)
-    }
-  }
-
   if (loading) {
     return (
       <div style={{
@@ -94,10 +85,6 @@ function App() {
         Loading...
       </div>
     )
-  }
-
-  if (!language) {
-    return <LanguageSelector onSelect={handleLanguageSelect} />
   }
 
   return <MainScreen language={language} user={user} supabase={supabase} />
