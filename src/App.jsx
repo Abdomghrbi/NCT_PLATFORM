@@ -100,7 +100,7 @@ function App() {
     return <LanguageSelector onSelect={handleLanguageSelect} />
   }
 
-  return <MainScreen language={language} user={user} />
+  return <MainScreen language={language} user={user} supabase={supabase} />
 }
 
 export default App
