@@ -178,7 +178,7 @@ function MainScreen({ language, user, supabase }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}>
             <span style={{ fontSize: '16px' }}>🪙</span>
             <span style={{ fontSize: '16px', color: 'white', fontWeight: 'bold' }}>
-              {coins.toLocaleString()} $NCT
+              {coins.toLocaleString()} NCT
             </span>
           </div>
         </div>
