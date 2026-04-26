@@ -157,7 +157,7 @@ function MainScreen({ language, user, supabase }) {
           justifyContent: 'center',
           fontSize: '24px'
         }}>
-          🐋
+          
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'white' }}>
