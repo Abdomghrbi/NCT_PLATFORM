@@ -115,7 +115,7 @@ function Whale({ onTap, showTap }) {
         fontSize: '22px',
         opacity: 0.5,
         animation: 'float 3s ease-in-out infinite'
-      }}>🪙</div>
+      }}>🐟</div>
 
       <div style={{
         position: 'absolute',
@@ -123,8 +123,8 @@ function Whale({ onTap, showTap }) {
         bottom: '35%',
         fontSize: '18px',
         opacity: 0.4,
-        animation: 'float 2.5s ease-in-out infinite 0.5s'
-      }}>🪙</div>
+        animation: 'float 2.s ease-in-out infinite 0.5s'
+      }}>🐠</div>
 
       {/* Main Whale SVG */}
       <svg
