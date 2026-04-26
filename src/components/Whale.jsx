@@ -10,7 +10,7 @@ function Whale({ onTap, showTap }) {
 
   useEffect(() => {
     // Idle floating animation
-    gsap.to(whaleRef.current, {
+    const idleTween = gsap.to(whaleRef.current, {
       y: -8,
       duration: 2.5,
       repeat: -1,
@@ -19,7 +19,7 @@ function Whale({ onTap, showTap }) {
     })
 
     // Arms swaying
-    gsap.to(leftArmRef.current, {
+    const leftArmTween = gsap.to(leftArmRef.current, {
       rotation: -8,
       duration: 2.5,
       repeat: -1,
@@ -28,7 +28,7 @@ function Whale({ onTap, showTap }) {
       transformOrigin: "80% 20%"
     })
 
-    gsap.to(rightArmRef.current, {
+    const rightArmTween = gsap.to(rightArmRef.current, {
       rotation: 8,
       duration: 2.2,
       repeat: -1,
@@ -38,8 +38,8 @@ function Whale({ onTap, showTap }) {
     })
 
     // Bubbles floating up
-    bubbleRefs.current.forEach((bubble, i) => {
-      gsap.to(bubble, {
+    const bubbleTweens = bubbleRefs.current.map((bubble, i) => {
+      return gsap.to(bubble, {
         y: -40,
         x: Math.sin(i) * 15,
         opacity: 0,
@@ -49,24 +49,50 @@ function Whale({ onTap, showTap }) {
         ease: "power1.out"
       })
     })
+
+    return () => {
+      idleTween.kill()
+      leftArmTween.kill()
+      rightArmTween.kill()
+      bubbleTweens.forEach(t => t.kill())
+    }
   }, [])
 
   useEffect(() => {
     if (showTap) {
+      // إيقاف animations القديمة على الحوت
+      gsap.killTweensOf(whaleRef.current, "scaleX,scaleY")
+      gsap.killTweensOf(coinRef.current)
+
       // Squash and stretch
-      gsap.to(whaleRef.current, {
-        scaleX: 1.03,
-        scaleY: 0.97,
-        duration: 0.08,
-        yoyo: true,
-        repeat: 3,
-        ease: "power2.out"
-      })
+      gsap.fromTo(whaleRef.current,
+        { scaleX: 1, scaleY: 1 },
+        {
+          scaleX: 1.05,
+          scaleY: 0.95,
+          duration: 0.08,
+          yoyo: true,
+          repeat: 3,
+          ease: "power2.out",
+          onComplete: () => {
+            gsap.set(whaleRef.current, { scaleX: 1, scaleY: 1 })
+          }
+        }
+      )
 
       // Coin pop
       gsap.fromTo(coinRef.current,
         { scale: 0.5, opacity: 1, y: 0 },
-        { scale: 1.5, opacity: 0, y: -80, duration: 0.8, ease: "back.out(1.7)" }
+        {
+          scale: 1.5,
+          opacity: 0,
+          y: -80,
+          duration: 0.8,
+          ease: "back.out(1.7)",
+          onComplete: () => {
+            gsap.set(coinRef.current, { scale: 0.5, opacity: 0, y: 0 })
+          }
+        }
       )
     }
   }, [showTap])
@@ -123,7 +149,7 @@ function Whale({ onTap, showTap }) {
         bottom: '35%',
         fontSize: '18px',
         opacity: 0.4,
-        animation: 'float 2.s ease-in-out infinite 0.5s'
+        animation: 'float 2.5s ease-in-out infinite 0.5s'
       }}>🐠</div>
 
       {/* Main Whale SVG */}
@@ -164,22 +190,17 @@ function Whale({ onTap, showTap }) {
           </linearGradient>
         </defs>
 
-        
-
         {/* جسم الحوت */}
         <path d="M 223.281 197.229 C 219.032 205.471 210.572 216.761 180.019 216.385 C 170.731 226.11 161.515 232.566 158.237 234.526 C 116.953 252.461 82.911 225.914 61.412 193.465 C 45.608 165.973 43.895 143.989 42.278 118.64 C 41.774 105.141 46.172 65.315 60.54 50.798 C 75 38 88 32 99.783 32.555 C 125.236 30.922 155 45 163.878 70.004 C 171.053 92.934 171.841 110.491 163.058 149.57 C 157.372 172.152 158.09 172.046 147.633 198.871 C 140.632 218.61 170.464 213.22 167.847 206.629 C 159.183 194.488 164.176 174.411 179.301 170.678 C 174.526 188.824 188.918 178.702 187.471 195.151 C 196.821 186.724 202.942 189.527 209.392 189.409 C 216.08 195.941 232.335 171.603 223.525 196.709 Z"
-        
           fill="url(#bodyGradient)"
         />
 
         {/* اللون الرمادي بطن الحوت */}
         <path
           d="M 108.176 231.372 C 119.657 235.594 143.306 238.606 155.76 232.54 C 128.055 238.892 122.375 204.611 127.893 165.857 C 131.287 144.849 134.014 132.351 126.027 127.705 C 122.123 125.102 114.163 123.727 99.583 122.842 C 76.762 122.683 69.379 123.064 62.144 129.306 C 51.476 142.065 64.55 172.131 71.089 189.298 C 79.172 205.527 82.143 219.286 107.373 230.561"
-           fill="url(#bellyGradient)"
+          fill="url(#bellyGradient)"
           opacity="0.7"
         />
-
-    
 
         {/* اليدين */}
         <g ref={leftArmRef}>
@@ -239,15 +260,11 @@ function Whale({ onTap, showTap }) {
 
         {/* القبعة */}
         <g>
-        
           <path d="M 71.013 44.394 C 69.607 44.177 48 9.447 143.702 43.877 Q 58.654 51.176 89.392 17.819 Q 132.812 -2.462 145.122 45.605"
-            
             fill="url(#capGradient)"
             stroke="#d0d0d0"
             strokeWidth="1"
           />
-
-          
 
           {/* رمز المرساة */}
           <circle cx="100" cy="25" r="8" fill="#4a90e2" />
