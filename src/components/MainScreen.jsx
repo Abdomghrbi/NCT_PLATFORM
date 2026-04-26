@@ -57,19 +57,36 @@ function MainScreen({ language, user, supabase }) {
     }, 60000) // كل دقيقة
 
     return () => clearInterval(interval)
-  }, [])
+  }, [user])
 
   const loadUserData = async () => {
     const { data, error } = await supabase
       .from('users')
-      .select('coins, energy, level')
+      .select('coins, energy, level, last_energy_update')
       .eq('telegram_id', user.telegram_id)
       .single()
 
     if (data) {
+      const now = new Date()
+      const lastUpdate = new Date(data.last_energy_update || now)
+      const minutesPassed = Math.floor((now - lastUpdate) / 60000)
+      const energyToAdd = Math.min(minutesPassed, 100 - (data.energy || 0))
+      const newEnergy = Math.min((data.energy || 0) + energyToAdd, 100)
+      
       setCoins(data.coins || 0)
-      setEnergy(data.energy || 100)
+      setEnergy(newEnergy)
       setLevel(data.level || 1)
+      
+      // تحديث Supabase بالطاقة الجديدة والوقت
+      if (energyToAdd > 0) {
+        await supabase
+          .from('users')
+          .update({ 
+            energy: newEnergy,
+            last_energy_update: now.toISOString()
+          })
+          .eq('telegram_id', user.telegram_id)
+      }
     }
   }
 
@@ -80,7 +97,8 @@ function MainScreen({ language, user, supabase }) {
       .from('users')
       .update({ 
         coins: newCoins,
-        energy: newEnergy
+        energy: newEnergy,
+        last_energy_update: new Date().toISOString()
       })
       .eq('telegram_id', user.telegram_id)
   }
@@ -90,7 +108,10 @@ function MainScreen({ language, user, supabase }) {
     
     await supabase
       .from('users')
-      .update({ energy: newEnergy })
+      .update({ 
+        energy: newEnergy,
+        last_energy_update: new Date().toISOString()
+      })
       .eq('telegram_id', user.telegram_id)
   }
 
