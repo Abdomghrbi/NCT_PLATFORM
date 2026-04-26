@@ -226,7 +226,7 @@ function MainScreen({ language, user, supabase }) {
           alignItems: 'center',
           gap: '8px'
         }}>
-          <span style={{ fontSize: '28px' }}>📚</span>
+          <span style={{ fontSize: '28px' }}>🪸</span>
           <span style={{ textAlign: 'center' }}>{t.feed}</span>
         </button>
 
@@ -244,7 +244,7 @@ function MainScreen({ language, user, supabase }) {
           alignItems: 'center',
           gap: '8px'
         }}>
-          <span style={{ fontSize: '28px' }}>👕</span>
+          <span style={{ fontSize: '28px' }}>🐋</span>
           <span style={{ textAlign: 'center' }}>{t.wardrobe}</span>
         </button>
 
@@ -262,7 +262,7 @@ function MainScreen({ language, user, supabase }) {
           alignItems: 'center',
           gap: '8px'
         }}>
-          <span style={{ fontSize: '28px' }}>🎮</span>
+          <span style={{ fontSize: '28px' }}>🐳</span>
           <span style={{ textAlign: 'center' }}>{t.play}</span>
         </button>
       </div>
@@ -282,19 +282,19 @@ function MainScreen({ language, user, supabase }) {
         marginBottom: '10px',
     }}>
         <div style={{ textAlign: 'center', color: '#4a90d9' }}>
-          <div style={{ fontSize: '24px', marginBottom: '4px' }}>🏠</div>
+          <div style={{ fontSize: '24px', marginBottom: '4px' }}>🤿</div>
           <div style={{ fontSize: '12px', color: '#4a90d9' }}>{t.home}</div>
         </div>
         <div style={{ textAlign: 'center', color: '#7a8a9a' }}>
-          <div style={{ fontSize: '24px', marginBottom: '4px' }}>📋</div>
+          <div style={{ fontSize: '24px', marginBottom: '4px' }}>🎣</div>
           <div style={{ fontSize: '12px', color: '#7a8a9a' }}>{t.quests}</div>
         </div>
         <div style={{ textAlign: 'center', color: '#7a8a9a' }}>
-          <div style={{ fontSize: '24px', marginBottom: '4px' }}>🏆</div>
+          <div style={{ fontSize: '24px', marginBottom: '4px' }}>🪩</div>
           <div style={{ fontSize: '12px', color: '#7a8a9a' }}>{t.rating}</div>
         </div>
         <div style={{ textAlign: 'center', color: '#7a8a9a' }}>
-          <div style={{ fontSize: '24px', marginBottom: '4px' }}>💼</div>
+          <div style={{ fontSize: '24px', marginBottom: '4px' }}>🪣</div>
           <div style={{ fontSize: '12px', color: '#7a8a9a' }}>{t.wallet}</div>
         </div>
       </div>
