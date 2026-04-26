@@ -186,7 +186,7 @@ function MainScreen({ language, user, supabase }) {
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '12px', color: '#7eb8e8', marginBottom: '4px' }}>{t.energy}</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}>
-            <span style={{ fontSize: '16px' }}>🔋</span>
+            <span style={{ fontSize: '16px' }}>🧊</span>
             <span style={{ fontSize: '16px', color: 'white', fontWeight: 'bold' }}>
               {energy}/100
             </span>
