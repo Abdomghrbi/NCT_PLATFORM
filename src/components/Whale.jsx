@@ -274,7 +274,7 @@ function Whale({ onTap, showTap }) {
             fontSize="10"
             fontWeight="bold"
           >
-            $
+            NCT
           </text>
         </g>
       </svg>
