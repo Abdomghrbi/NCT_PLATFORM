@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react'
 import WebApp from '@twa-dev/sdk'
 import Whale from './Whale'
 
-// ═══════════════════════════════════════════════════════
-// 1. إضافة الترجمة العربية + اكتشاف تلقائي للغة
-// ═══════════════════════════════════════════════════════
-
 const translations = {
   en: {
     level: 'Lvl',
@@ -17,9 +13,7 @@ const translations = {
     home: 'Home',
     quests: 'Quests',
     rating: 'Rating',
-    wallet: 'Wallet',
-    title: 'Community Whale',
-    subtitle: 'NOTCOIN TOGETHER'
+    wallet: 'Wallet'
   },
   ru: {
     level: 'Ур',
@@ -31,90 +25,18 @@ const translations = {
     home: 'Главная',
     quests: 'Квесты',
     rating: 'Рейтинг',
-    wallet: 'Кошелек TON',
-    title: 'Кит Сообщества',
-    subtitle: 'NOTCOIN TOGETHER'
-  },
-  ar: {
-    level: 'المستوى',
-    softCoin: 'العملة',
-    energy: 'الطاقة',
-    feed: 'إطعام',
-    wardrobe: 'خزانة NFT',
-    play: 'اللعب في العمق',
-    home: 'الرئيسية',
-    quests: 'المهام',
-    rating: 'التصنيف',
-    wallet: 'المحفظة',
-    title: 'حوت المجتمع',
-    subtitle: 'نوتكوين معاً'
+    wallet: 'Кошелек TON'
   }
 }
 
-// الدوال المساعدة للغة
-const getBrowserLanguage = () => {
-  const lang = navigator.language || navigator.userLanguage
-  return lang.split('-')[0] // 'en-US' → 'en'
-}
-
-const getTelegramLanguage = () => {
-  try {
-    // Telegram WebApp يعطي لغة المستخدم
-    return WebApp.initDataUnsafe?.user?.language_code
-  } catch {
-    return null
-  }
-}
-
-const getDefaultLanguage = () => {
-  // الأولوية: Telegram → Browser → English
-  const tgLang = getTelegramLanguage()
-  const browserLang = getBrowserLanguage()
-  
-  const supported = ['en', 'ru', 'ar']
-  
-  if (tgLang && supported.includes(tgLang)) return tgLang
-  if (supported.includes(browserLang)) return browserLang
-  return 'en'
-}
-
-const isRTL = (lang) => lang === 'ar'
-
-// ═══════════════════════════════════════════════════════
-// 2. المكون الرئيسي المحدث
-// ═══════════════════════════════════════════════════════
-
-function MainScreen({ language: propLanguage, user, supabase }) {
-  
-  // ✅ اكتشاف تلقائي للغة مع إمكانية التجاوز من props
-  const [language, setLanguage] = useState(() => {
-    // إذا جت لغة من props نستخدمها، وإلا نكتشف تلقائياً
-    return propLanguage || getDefaultLanguage()
-  })
-  
-  const t = translations[language] || translations.en
-  const rtl = isRTL(language)
-  
+function MainScreen({ language, user, supabase }) {
+  const t = translations[language]
   const [coins, setCoins] = useState(0)
   const [energy, setEnergy] = useState(100)
   const [level, setLevel] = useState(1)
   const [showTap, setShowTap] = useState(false)
 
-  // تحميل اللغة المحفوظة (اختياري)
-  useEffect(() => {
-    const savedLang = localStorage.getItem('nct_language')
-    if (savedLang && translations[savedLang]) {
-      setLanguage(savedLang)
-    }
-  }, [])
-
-  // حفظ اللغة عند التغيير
-  const changeLanguage = (lang) => {
-    setLanguage(lang)
-    localStorage.setItem('nct_language', lang)
-  }
-
-  // تحميل البيانات من Supabase
+  // تحميل البيانات من Supabase أول ما يفتح
   useEffect(() => {
     if (user?.telegram_id) {
       loadUserData()
@@ -132,7 +54,7 @@ function MainScreen({ language: propLanguage, user, supabase }) {
         }
         return prev
       })
-    }, 60000)
+    }, 60000) // كل دقيقة
 
     return () => clearInterval(interval)
   }, [user])
@@ -140,16 +62,11 @@ function MainScreen({ language: propLanguage, user, supabase }) {
   const loadUserData = async () => {
     const { data, error } = await supabase
       .from('users')
-      .select('coins, energy, level, last_energy_update, language')
+      .select('coins, energy, level, last_energy_update')
       .eq('telegram_id', user.telegram_id)
       .single()
 
     if (data) {
-      // ✅ تحميل لغة المستخدم من قاعدة البيانات لو موجودة
-      if (data.language && translations[data.language]) {
-        setLanguage(data.language)
-      }
-      
       const now = new Date()
       const lastUpdate = new Date(data.last_energy_update || now)
       const minutesPassed = Math.floor((now - lastUpdate) / 60000)
@@ -160,6 +77,7 @@ function MainScreen({ language: propLanguage, user, supabase }) {
       setEnergy(newEnergy)
       setLevel(data.level || 1)
       
+      // تحديث Supabase بالطاقة الجديدة والوقت
       if (energyToAdd > 0) {
         await supabase
           .from('users')
@@ -180,8 +98,7 @@ function MainScreen({ language: propLanguage, user, supabase }) {
       .update({ 
         coins: newCoins,
         energy: newEnergy,
-        last_energy_update: new Date().toISOString(),
-        language: language // ✅ حفظ اللغة المختارة
+        last_energy_update: new Date().toISOString()
       })
       .eq('telegram_id', user.telegram_id)
   }
@@ -209,68 +126,44 @@ function MainScreen({ language: propLanguage, user, supabase }) {
     setShowTap(true)
     setTimeout(() => setShowTap(false), 500)
     
+    // حفظ بـ Supabase
     await saveToSupabase(newCoins, newEnergy)
   }
 
-  // ═══════════════════════════════════════════════════════
-  // 3. الـ Return مع دعم RTL
-  // ═══════════════════════════════════════════════════════
-
   return (
-    <div 
-      dir={rtl ? 'rtl' : 'ltr'}
-      lang={language}
-      style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(180deg, #4a90d9 0%, #1e3a5f 50%, #0d2137 100%)',
-        padding: '10px',
-        paddingBottom: '40px',
-        fontFamily: rtl 
-          ? '"Segoe UI", "Tahoma", "Arial", sans-serif' 
-          : 'inherit'
-      }}
-    >
-      {/* Language Switcher (اختياري - يمكن إخفاؤه) */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '8px',
-        marginBottom: '10px'
-      }}>
-        {['en', 'ru', 'ar'].map((lang) => (
-          <button
-            key={lang}
-            onClick={() => changeLanguage(lang)}
-            style={{
-              padding: '4px 12px',
-              borderRadius: '8px',
-              border: 'none',
-              background: language === lang ? '#4a90d9' : 'rgba(255,255,255,0.1)',
-              color: 'white',
-              cursor: 'pointer',
-              fontSize: '12px'
-            }}
-          >
-            {lang === 'en' ? '🇬🇧 EN' : lang === 'ru' ? '🇷🇺 RU' : '🇸🇦 AR'}
-          </button>
-        ))}
-      </div>
-
+    <div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(180deg, #4a90d9 0%, #1e3a5f 50%, #0d2137 100%)',
+      padding: '10px',
+      paddingBottom: '40px'
+    }}>
       {/* Header */}
       <div style={{
         background: 'rgba(13, 33, 55, 0.9)',
         borderRadius: '16px',
         padding: '12px 16px',
         marginBottom: '15px',
-        display: 'flex',
+        display: 'none',
         alignItems: 'center',
         gap: '12px'
       }}>
+        <div style={{
+          width: '44px',
+          height: '44px',
+          borderRadius: '12px',
+          background: 'linear-gradient(135deg, #4a90d9, #2e5a8c)',
+          display: 'none',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '24px'
+        }}>
+          
+        </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'white' }}>
-            NCT: {t.title}
+            NCT: {language === 'en' ? 'Community Whale' : 'Кит Сообщества'}
           </div>
-          <div style={{ fontSize: '12px', color: '#7eb8e8' }}>{t.subtitle}</div>
+          <div style={{ fontSize: '12px', color: '#7eb8e8' }}>NOTCOIN TOGETHER</div>
         </div>
         <div style={{ color: '#7eb8e8', fontSize: '20px' }}>⋮</div>
       </div>
@@ -282,17 +175,11 @@ function MainScreen({ language: propLanguage, user, supabase }) {
         borderRadius: '12px',
         padding: '12px',
         marginBottom: '15px',
-        justifyContent: 'space-between',
-        flexDirection: rtl ? 'row-reverse' : 'row'
+        justifyContent: 'space-between'
       }}>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '12px', color: '#7eb8e8', marginBottom: '4px' }}>{t.level}</div>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '6px',
-            flexDirection: rtl ? 'row-reverse' : 'row'
-          }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span style={{ fontSize: '18px' }}>🐋</span>
             <div style={{
               width: '40px',
@@ -309,29 +196,17 @@ function MainScreen({ language: propLanguage, user, supabase }) {
 
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '12px', color: '#7eb8e8', marginBottom: '4px' }}>{t.softCoin}</div>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '6px', 
-            justifyContent: 'center',
-            flexDirection: rtl ? 'row-reverse' : 'row'
-          }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}>
             <span style={{ fontSize: '16px' }}>🫧</span>
             <span style={{ fontSize: '16px', color: 'white', fontWeight: 'bold' }}>
-              {coins.toLocaleString(language === 'ar' ? 'ar-SA' : language === 'ru' ? 'ru-RU' : 'en-US')} NCT
+              {coins.toLocaleString()} NCT
             </span>
           </div>
         </div>
 
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '12px', color: '#7eb8e8', marginBottom: '4px' }}>{t.energy}</div>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '6px', 
-            justifyContent: 'center',
-            flexDirection: rtl ? 'row-reverse' : 'row'
-          }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}>
             <span style={{ fontSize: '16px' }}>🧊</span>
             <span style={{ fontSize: '16px', color: 'white', fontWeight: 'bold' }}>
               {energy}/100
@@ -356,32 +231,61 @@ function MainScreen({ language: propLanguage, user, supabase }) {
       <div style={{
         display: 'flex',
         gap: '12px',
-        marginBottom: '20px',
-        flexDirection: rtl ? 'row-reverse' : 'row'
+        marginBottom: '20px'
       }}>
-        {[
-          { icon: '🪸', text: t.feed },
-          { icon: '🐋', text: t.wardrobe },
-          { icon: '🐳', text: t.play }
-        ].map((btn, i) => (
-          <button key={i} style={{
-            flex: 1,
-            background: 'rgba(74, 144, 217, 0.25)',
-            border: '1px solid rgba(74, 144, 217, 0.5)',
-            borderRadius: '16px',
-            padding: '20px 10px',
-            color: 'white',
-            fontSize: '14px',
-            cursor: 'pointer',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '8px'
-          }}>
-            <span style={{ fontSize: '28px' }}>{btn.icon}</span>
-            <span style={{ textAlign: 'center' }}>{btn.text}</span>
-          </button>
-        ))}
+        <button style={{
+          flex: 1,
+          background: 'rgba(74, 144, 217, 0.25)',
+          border: '1px solid rgba(74, 144, 217, 0.5)',
+          borderRadius: '16px',
+          padding: '20px 10px',
+          color: 'white',
+          fontSize: '14px',
+          cursor: 'pointer',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+          <span style={{ fontSize: '28px' }}>🪸</span>
+          <span style={{ textAlign: 'center' }}>{t.feed}</span>
+        </button>
+
+        <button style={{
+          flex: 1,
+          background: 'rgba(74, 144, 217, 0.25)',
+          border: '1px solid rgba(74, 144, 217, 0.5)',
+          borderRadius: '16px',
+          padding: '20px 10px',
+          color: 'white',
+          fontSize: '14px',
+          cursor: 'pointer',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+          <span style={{ fontSize: '28px' }}>🐋</span>
+          <span style={{ textAlign: 'center' }}>{t.wardrobe}</span>
+        </button>
+
+        <button style={{
+          flex: 1,
+          background: 'rgba(74, 144, 217, 0.25)',
+          border: '1px solid rgba(74, 144, 217, 0.5)',
+          borderRadius: '16px',
+          padding: '20px 10px',
+          color: 'white',
+          fontSize: '14px',
+          cursor: 'pointer',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+          <span style={{ fontSize: '28px' }}>🐳</span>
+          <span style={{ textAlign: 'center' }}>{t.play}</span>
+        </button>
       </div>
 
       {/* Bottom Navigation */}
@@ -395,27 +299,25 @@ function MainScreen({ language: propLanguage, user, supabase }) {
         display: 'flex',
         justifyContent: 'space-around',
         padding: '10px 5px',
-        borderRadius: '16px 16px 0 0',
-        marginBottom: '0',
-        flexDirection: rtl ? 'row-reverse' : 'row'
-      }}>
-        {[
-          { icon: '🤿', text: t.home, active: true },
-          { icon: '🎣', text: t.quests, active: false },
-          { icon: '🪩', text: t.rating, active: false },
-          { icon: '🪣', text: t.wallet, active: false }
-        ].map((item, i) => (
-          <div key={i} style={{ 
-            textAlign: 'center', 
-            color: item.active ? '#4a90d9' : '#7a8a9a',
-            cursor: 'pointer'
-          }}>
-            <div style={{ fontSize: '24px', marginBottom: '4px' }}>{item.icon}</div>
-            <div style={{ fontSize: '12px', color: item.active ? '#4a90d9' : '#7a8a9a' }}>
-              {item.text}
-            </div>
-          </div>
-        ))}
+        borderRadius: '16px',
+        marginBottom: '10px',
+    }}>
+        <div style={{ textAlign: 'center', color: '#4a90d9' }}>
+          <div style={{ fontSize: '24px', marginBottom: '4px' }}>🤿</div>
+          <div style={{ fontSize: '12px', color: '#4a90d9' }}>{t.home}</div>
+        </div>
+        <div style={{ textAlign: 'center', color: '#7a8a9a' }}>
+          <div style={{ fontSize: '24px', marginBottom: '4px' }}>🎣</div>
+          <div style={{ fontSize: '12px', color: '#7a8a9a' }}>{t.quests}</div>
+        </div>
+        <div style={{ textAlign: 'center', color: '#7a8a9a' }}>
+          <div style={{ fontSize: '24px', marginBottom: '4px' }}>🪩</div>
+          <div style={{ fontSize: '12px', color: '#7a8a9a' }}>{t.rating}</div>
+        </div>
+        <div style={{ textAlign: 'center', color: '#7a8a9a' }}>
+          <div style={{ fontSize: '24px', marginBottom: '4px' }}>🪣</div>
+          <div style={{ fontSize: '12px', color: '#7a8a9a' }}>{t.wallet}</div>
+        </div>
       </div>
     </div>
   )
